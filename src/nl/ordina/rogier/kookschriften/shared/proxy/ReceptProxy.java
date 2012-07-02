@@ -2,8 +2,8 @@ package nl.ordina.rogier.kookschriften.shared.proxy;
 
 import java.util.List;
 
-import nl.ordina.rogier.kookschriften.client.SoortRecepten;
-import nl.ordina.rogier.kookschriften.client.TijdEenheden;
+import nl.ordina.rogier.kookschriften.client.SoortRecept;
+import nl.ordina.rogier.kookschriften.client.TijdEenheid;
 import nl.ordina.rogier.kookschriften.domain.Recept;
 import nl.ordina.rogier.kookschriften.server.locator.ReceptLocator;
 
@@ -22,8 +22,8 @@ public interface ReceptProxy extends EntityProxy  {
     public void setEmail(String email);
     public String getNaamRecept();
     public void setNaamRecept(String naamRecept);
-    public SoortRecepten getSoortRecept();
-    public void setSoortRecept(SoortRecepten soortRecept);
+    public SoortRecept getSoortRecept();
+    public void setSoortRecept(SoortRecept soortRecept);
     public String getAfkomstigVan();
     public void setAfkomstigVan(String afkomstigVan);
     public List<String> getIngredienten();
@@ -32,8 +32,8 @@ public interface ReceptProxy extends EntityProxy  {
     public void setBereiding(String bereiding);
     public String getBereidingsTijd();
     public void setBereidingsTijd(String bereidingsTijd);
-    public TijdEenheden getBereidingsTijdEenheid();
-    public void setBereidingsTijdEenheid(TijdEenheden bereidingsTijdEenheid);
+    public TijdEenheid getBereidingsTijdEenheid();
+    public void setBereidingsTijdEenheid(TijdEenheid bereidingsTijdEenheid);
     public List<String> getUploadedImages();
     public void setUploadedImages(List<String> uploadedImages);
     

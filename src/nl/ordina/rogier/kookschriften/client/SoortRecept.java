@@ -1,5 +1,5 @@
 package nl.ordina.rogier.kookschriften.client;
 
-public enum SoortRecepten {
+public enum SoortRecept {
     Voorgerecht,Tussengerecht,Hoofdgerecht,Nagerecht;
 }

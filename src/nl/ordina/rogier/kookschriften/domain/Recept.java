@@ -6,8 +6,8 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.PrePersist;
 
-import nl.ordina.rogier.kookschriften.client.SoortRecepten;
-import nl.ordina.rogier.kookschriften.client.TijdEenheden;
+import nl.ordina.rogier.kookschriften.client.SoortRecept;
+import nl.ordina.rogier.kookschriften.client.TijdEenheid;
 
 import com.googlecode.objectify.annotation.Cached;
 
@@ -19,7 +19,7 @@ public class Recept {
     private Integer version = 0;
     private String email;
     private String naamRecept;
-    private SoortRecepten soortRecept;
+    private SoortRecept soortRecept;
     private String afkomstigVan;
     private List<String> ingredienten;
     private Integer bereidingTijd;
@@ -71,11 +71,11 @@ public class Recept {
         this.naamRecept = naamRecept;
     }
 
-    public SoortRecepten getSoortRecept() {
+    public SoortRecept getSoortRecept() {
         return soortRecept;
     }
 
-    public void setSoortRecept(SoortRecepten soortRecept) {
+    public void setSoortRecept(SoortRecept soortRecept) {
         this.soortRecept = soortRecept;
     }
 
@@ -111,17 +111,17 @@ public class Recept {
         this.bereidingsTijd = bereidingsTijd;
     }
 
-    public TijdEenheden getBereidingsTijdEenheid() {
+    public TijdEenheid getBereidingsTijdEenheid() {
         return bereidingsTijdEenheid;
     }
 
-    public void setBereidingsTijdEenheid(TijdEenheden bereidingsTijdEenheid) {
+    public void setBereidingsTijdEenheid(TijdEenheid bereidingsTijdEenheid) {
         this.bereidingsTijdEenheid = bereidingsTijdEenheid;
     }
 
     private String bereiding;
     private String bereidingsTijd;
-    private TijdEenheden bereidingsTijdEenheid;
+    private TijdEenheid bereidingsTijdEenheid;
 
     /**
      * Auto-increment version # whenever persisted
