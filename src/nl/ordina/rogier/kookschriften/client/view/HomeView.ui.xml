@@ -1,0 +1,14 @@
+<!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
+<ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder"
+	xmlns:g="urn:import:com.google.gwt.user.client.ui">
+	<ui:style>
+		.important {
+			font-weight: bold;
+		}
+	</ui:style>
+	<g:HTMLPanel>
+	<h1>Kookschriften</h1>
+	<p>De naam zegt het al. Iedereen die een beetje van koken houd heeft wel een schrift met daarin belangrijke recepten.</p>
+	<p>Deze webapplicatie is bedoeld voor het bewaren van recepten. Dit kunnen oude recepten van oma zijn of gewoon leuk recepten die je hebt gevonden op internet. Daarnaast is het mogelijk recepten te delen met andere.</p>
+	</g:HTMLPanel>
+</ui:UiBinder> 

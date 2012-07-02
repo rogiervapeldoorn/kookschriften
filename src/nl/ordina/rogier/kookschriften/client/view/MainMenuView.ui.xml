@@ -1,0 +1,22 @@
+<!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
+<ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder"
+	xmlns:g="urn:import:com.google.gwt.user.client.ui">
+	<ui:style>
+		.important {
+			font-weight: bold;
+		}
+	</ui:style>
+	<g:HTMLPanel>
+		<g:MenuBar ui:field="menuBar">
+			<g:MenuItem ui:field="homeMenuItem" text="Home"/>
+			<g:MenuItemSeparator/>
+			<g:MenuItem ui:field="receptToevoegenMenuItem" text="Toevoegen Recepten"/>
+			<g:MenuItemSeparator/>
+			<g:MenuItem ui:field="eigenReceptenMenuItem" text="Eigen Recepten"/>
+			<g:MenuItemSeparator/>
+			<g:MenuItem ui:field="receptenZoekenMenuItem" text="Recepten zoeken"/>
+		</g:MenuBar>
+		<g:HTMLPanel ui:field="appSpace">
+		</g:HTMLPanel>
+	</g:HTMLPanel>
+</ui:UiBinder> 
