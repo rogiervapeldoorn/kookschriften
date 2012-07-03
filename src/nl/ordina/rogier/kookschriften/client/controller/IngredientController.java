@@ -2,21 +2,16 @@ package nl.ordina.rogier.kookschriften.client.controller;
 
 import nl.ordina.rogier.kookschriften.client.ExpensesRequestFactory;
 import nl.ordina.rogier.kookschriften.client.GewichtEenheid;
-import nl.ordina.rogier.kookschriften.client.IngredientRegelRequest;
-import nl.ordina.rogier.kookschriften.client.IngredientRequest;
 import nl.ordina.rogier.kookschriften.client.view.IngredientView;
-import nl.ordina.rogier.kookschriften.shared.proxy.IngredientProxy;
-import nl.ordina.rogier.kookschriften.shared.proxy.IngredientRegelProxy;
 
 import com.google.gwt.core.client.GWT;
 import com.google.web.bindery.event.shared.EventBus;
 import com.google.web.bindery.event.shared.SimpleEventBus;
 
-public class IngredientController {
+public class IngredientController{
 
     IngredientView ingredient;
     private final ExpensesRequestFactory requestFactory = GWT.create(ExpensesRequestFactory.class);
-
     
     public IngredientController(IngredientView ingredient) {
 	final EventBus eventBus = new SimpleEventBus();
@@ -35,8 +30,9 @@ public class IngredientController {
     }
 
     private void bind() {
+	
     }
-    
+
    
 
 }

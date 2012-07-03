@@ -7,6 +7,8 @@ import nl.ordina.rogier.kookschriften.client.ExpensesRequestFactory;
 import nl.ordina.rogier.kookschriften.client.ReceptRequest;
 import nl.ordina.rogier.kookschriften.client.UploadUrlRequest;
 import nl.ordina.rogier.kookschriften.client.UploadedImageRequest;
+import nl.ordina.rogier.kookschriften.client.events.NewIngredientEvent;
+import nl.ordina.rogier.kookschriften.client.events.NewIngredientEventHandler;
 import nl.ordina.rogier.kookschriften.client.model.HistoryManager;
 import nl.ordina.rogier.kookschriften.client.view.HistoryToken;
 import nl.ordina.rogier.kookschriften.client.view.IngredientView;
@@ -18,6 +20,8 @@ import nl.ordina.rogier.kookschriften.shared.proxy.UploadedImageProxy;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
+import com.google.gwt.event.shared.GwtEvent;
+import com.google.gwt.event.shared.HasHandlers;
 import com.google.gwt.user.client.ui.FormPanel;
 import com.google.gwt.user.client.ui.FormPanel.SubmitCompleteEvent;
 import com.google.gwt.user.client.ui.Image;
@@ -34,7 +38,6 @@ public class ReceptToevoegenController {
     private final ExpensesRequestFactory requestFactory = GWT.create(ExpensesRequestFactory.class);
 
     HistoryManager historyManager;
-    private int nrOfIngredienten = 3;
     List<String> uploadedImages = new ArrayList<String>();
     
     public ReceptToevoegenController(HistoryManager historyManager, ReceptToevoegenView receptToevoegen) {
@@ -49,11 +52,21 @@ public class ReceptToevoegenController {
 
     private void init() {
 	UtilController.initSoortRecept(receptToevoegen.soortRecept);
-	for (int i = 0; i < nrOfIngredienten; i++) {
 	    IngredientView ingredient = new IngredientView();
+	    NewIngredientEventHandler newIngredientEventHandler=new NewIngredientEventHandler() {
+	        
+	        @Override
+	        public void onNewIngredient(NewIngredientEvent event) {
+	            if (receptToevoegen.ingredienten.getWidgetCount() < 40) {
+			    IngredientView ingredient = new IngredientView();
+			    receptToevoegen.ingredienten.add(ingredient);
+			    ingredient.addNewIngredientEventHandler(this);
+			}	
+	        }
+	    };
+	    ingredient.addNewIngredientEventHandler(newIngredientEventHandler);
 	    receptToevoegen.ingredienten.add(ingredient);
 	}
-    }
 
     private void bind() {
 	receptToevoegen.opslaan.addClickHandler(new ClickHandler() {
@@ -67,9 +80,8 @@ public class ReceptToevoegenController {
 	    @Override
 	    public void onClick(ClickEvent event) {
 		IngredientView ingredient = new IngredientView();
-		if (nrOfIngredienten < 40) {
+		if (receptToevoegen.ingredienten.getWidgetCount() < 40) {
 		    receptToevoegen.ingredienten.add(ingredient);
-		    nrOfIngredienten++;
 		}
 	    }
 	});
@@ -77,9 +89,8 @@ public class ReceptToevoegenController {
 
 	    @Override
 	    public void onClick(ClickEvent event) {
-		if (nrOfIngredienten > 3) {
-		    nrOfIngredienten--;
-		    receptToevoegen.ingredienten.remove(nrOfIngredienten);
+		if (receptToevoegen.ingredienten.getWidgetCount()> 2) {
+		    receptToevoegen.ingredienten.remove(receptToevoegen.ingredienten.getWidgetCount());
 		}
 
 	    }
@@ -168,4 +179,5 @@ public class ReceptToevoegenController {
 
     }
 
+  
 }
