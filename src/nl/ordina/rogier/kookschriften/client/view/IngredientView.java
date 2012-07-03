@@ -27,8 +27,8 @@ import com.google.gwt.user.client.ui.Widget;
 
 public class IngredientView extends Composite implements HasText, HasHandlers {
 
-    private boolean gewichtHasValue = true;
-    private boolean ingredientHasValue = true;
+    private boolean gewichtHasValue = false;
+    private boolean ingredientHasValue = false;
     private HandlerManager handlerManager;
 
     private final ExpensesRequestFactory requestFactory = GWT.create(ExpensesRequestFactory.class);
@@ -53,13 +53,13 @@ public class IngredientView extends Composite implements HasText, HasHandlers {
 
 	    @Override
 	    public void onValueChange(ValueChangeEvent<Integer> event) {
-		if (event.getValue() != null) {
+		if (event.getValue() != null && event.getValue() != 0) {
 		    gewichtHasValue = true;
 		} else {
 		    gewichtHasValue = false;
 		}
 		if (ingredientHasValue && gewichtHasValue) {
-		    NewIngredientEvent newIngredientEvent=new NewIngredientEvent("");
+		    NewIngredientEvent newIngredientEvent = new NewIngredientEvent("");
 		    fireEvent(newIngredientEvent);
 		}
 	    }
@@ -69,13 +69,13 @@ public class IngredientView extends Composite implements HasText, HasHandlers {
 	    @Override
 	    public void onValueChange(ValueChangeEvent<String> event) {
 
-		if (event.getValue() != null) {
+		if (event.getValue() != null && event.getValue() != "") {
 		    ingredientHasValue = true;
 		} else {
 		    ingredientHasValue = false;
 		}
 		if (ingredientHasValue && gewichtHasValue) {
-		    NewIngredientEvent newIngredientEvent=new NewIngredientEvent("");
+		    NewIngredientEvent newIngredientEvent = new NewIngredientEvent("");
 		    fireEvent(newIngredientEvent);
 		}
 	    }
@@ -91,7 +91,9 @@ public class IngredientView extends Composite implements HasText, HasHandlers {
 
     public IngredientRegelProxy getIngredientRegelProxy(ReceptRequest receptRequest) {
 	IngredientRegelProxy ingredientRegelProxy = receptRequest.create(IngredientRegelProxy.class);
-	ingredientRegelProxy.setGewicht(new Long(Gewicht.getValue()));
+	if (Gewicht != null && Gewicht.getValue() != null) {
+	    ingredientRegelProxy.setGewicht(Gewicht.getValue().longValue());
+	}
 	ingredientRegelProxy.setGewichtEenheid(GewichtEenheid.valueOf(Eenheid.getValue(Eenheid.getSelectedIndex())));
 	ingredientRegelProxy.setIngredient(Ingredient.getValue());
 	return ingredientRegelProxy;

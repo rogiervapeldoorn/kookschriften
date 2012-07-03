@@ -23,6 +23,7 @@ import com.google.gwt.user.client.ui.ListBox;
 import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.Widget;
 import com.google.gwt.user.client.ui.VerticalPanel;
+import com.google.gwt.user.client.ui.TextArea;
 
 public class ReceptToevoegenView extends Composite implements HasText {
     private static final Logger log = Logger.getLogger(ReceptToevoegenView.class.getName());
@@ -51,6 +52,9 @@ public class ReceptToevoegenView extends Composite implements HasText {
     @UiField public Button moreLines;
     @UiField public Button lessLines;
     @UiField public VerticalPanel ingredienten;
+    @UiField public TextBox bereidingsTijd;
+    @UiField public ListBox tijdEenheid;
+    @UiField public TextArea bereiding;
 
     public ReceptToevoegenView(HistoryManager historyManager) {
 	initWidget(uiBinder.createAndBindUi(this));

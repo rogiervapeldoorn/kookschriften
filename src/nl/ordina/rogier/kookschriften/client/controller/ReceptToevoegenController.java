@@ -5,6 +5,7 @@ import java.util.List;
 
 import nl.ordina.rogier.kookschriften.client.ExpensesRequestFactory;
 import nl.ordina.rogier.kookschriften.client.ReceptRequest;
+import nl.ordina.rogier.kookschriften.client.TijdEenheid;
 import nl.ordina.rogier.kookschriften.client.UploadUrlRequest;
 import nl.ordina.rogier.kookschriften.client.UploadedImageRequest;
 import nl.ordina.rogier.kookschriften.client.events.NewIngredientEvent;
@@ -39,7 +40,7 @@ public class ReceptToevoegenController {
 
     HistoryManager historyManager;
     List<String> uploadedImages = new ArrayList<String>();
-    
+
     public ReceptToevoegenController(HistoryManager historyManager, ReceptToevoegenView receptToevoegen) {
 	final EventBus eventBus = new SimpleEventBus();
 	requestFactory.initialize(eventBus);
@@ -52,21 +53,22 @@ public class ReceptToevoegenController {
 
     private void init() {
 	UtilController.initSoortRecept(receptToevoegen.soortRecept);
-	    IngredientView ingredient = new IngredientView();
-	    NewIngredientEventHandler newIngredientEventHandler=new NewIngredientEventHandler() {
-	        
-	        @Override
-	        public void onNewIngredient(NewIngredientEvent event) {
-	            if (receptToevoegen.ingredienten.getWidgetCount() < 40) {
-			    IngredientView ingredient = new IngredientView();
-			    receptToevoegen.ingredienten.add(ingredient);
-			    ingredient.addNewIngredientEventHandler(this);
-			}	
-	        }
-	    };
-	    ingredient.addNewIngredientEventHandler(newIngredientEventHandler);
-	    receptToevoegen.ingredienten.add(ingredient);
-	}
+	UtilController.initTijdEenheid(receptToevoegen.tijdEenheid);
+	IngredientView ingredient = new IngredientView();
+	NewIngredientEventHandler newIngredientEventHandler = new NewIngredientEventHandler() {
+
+	    @Override
+	    public void onNewIngredient(NewIngredientEvent event) {
+		if (receptToevoegen.ingredienten.getWidgetCount() < 40) {
+		    IngredientView ingredient = new IngredientView();
+		    receptToevoegen.ingredienten.add(ingredient);
+		    ingredient.addNewIngredientEventHandler(this);
+		}
+	    }
+	};
+	ingredient.addNewIngredientEventHandler(newIngredientEventHandler);
+	receptToevoegen.ingredienten.add(ingredient);
+    }
 
     private void bind() {
 	receptToevoegen.opslaan.addClickHandler(new ClickHandler() {
@@ -89,7 +91,7 @@ public class ReceptToevoegenController {
 
 	    @Override
 	    public void onClick(ClickEvent event) {
-		if (receptToevoegen.ingredienten.getWidgetCount()> 2) {
+		if (receptToevoegen.ingredienten.getWidgetCount() > 2) {
 		    receptToevoegen.ingredienten.remove(receptToevoegen.ingredienten.getWidgetCount());
 		}
 
@@ -157,11 +159,14 @@ public class ReceptToevoegenController {
 	ReceptProxy receptProxy = receptRequest.create(ReceptProxy.class);
 	receptProxy.setNaamRecept(receptToevoegen.naamRecept.getValue());
 	receptProxy.setAfkomstigVan(receptToevoegen.afkomstigVan.getValue());
+	receptProxy.setBereiding(receptToevoegen.bereiding.getValue());
+	receptProxy.setBereidingsTijd(receptToevoegen.bereidingsTijd.getValue());
+	receptProxy.setBereidingsTijdEenheid(TijdEenheid.valueOf(receptToevoegen.tijdEenheid.getValue(receptToevoegen.tijdEenheid.getSelectedIndex())));
 	receptProxy.setUploadedImages(uploadedImages);
-	List<IngredientRegelProxy> list=new ArrayList<IngredientRegelProxy>();
-	for (int i=0; i<receptToevoegen.ingredienten.getWidgetCount();i++){
-	    IngredientView ingredientView=(IngredientView)receptToevoegen.ingredienten.getWidget(i);
-	    IngredientRegelProxy ingredientRegelProxy=ingredientView.getIngredientRegelProxy(receptRequest);
+	List<IngredientRegelProxy> list = new ArrayList<IngredientRegelProxy>();
+	for (int i = 0; i < receptToevoegen.ingredienten.getWidgetCount(); i++) {
+	    IngredientView ingredientView = (IngredientView) receptToevoegen.ingredienten.getWidget(i);
+	    IngredientRegelProxy ingredientRegelProxy = ingredientView.getIngredientRegelProxy(receptRequest);
 	    list.add(ingredientRegelProxy);
 	}
 	receptProxy.setIngredienten(list);
@@ -179,5 +184,4 @@ public class ReceptToevoegenController {
 
     }
 
-  
 }

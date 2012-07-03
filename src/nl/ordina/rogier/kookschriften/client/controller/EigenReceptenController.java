@@ -47,8 +47,8 @@ public class EigenReceptenController {
 		TextColumn<ReceptProxy> urlColumn = new TextColumn<ReceptProxy>() {
 		    @Override
 		    public String getValue(ReceptProxy object) {
-			String urls="URLS:";
-			if (object.getUploadedImages()!=null)
+			String urls = "URLS:";
+		if (object.getUploadedImages()!=null)
 			{
 			for (String url : object.getUploadedImages()) {
 			    urls=urls+url;

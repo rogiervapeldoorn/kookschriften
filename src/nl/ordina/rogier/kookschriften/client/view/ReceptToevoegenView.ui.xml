@@ -10,7 +10,7 @@
 		<g:Grid width="448px" height="155px">
 			<g:row>
 				<g:customCell>
-					<g:Label text="Naam van recept:"/>
+					<g:Label text="Naam van recept:" width="109px"/>
 				</g:customCell>
 				<g:customCell>
 					<g:TextBox ui:field="naamRecept"/>
@@ -29,7 +29,7 @@
 					<g:Label text="Ingrediënten:"/>
 				</g:customCell>
 				<g:customCell>
-					<g:HorizontalPanel>
+					<g:HorizontalPanel width="268px">
 						<g:VerticalPanel ui:field="ingredienten"/>
 						<g:VerticalPanel>
 							<g:Button ui:field="lessLines" text="-" width="24" height="30"/>
@@ -45,8 +45,24 @@
 				<g:customCell>
 					<g:TextBox ui:field="afkomstigVan"/>
 				</g:customCell>
+			</g:row>
+			<g:row>
 				<g:customCell>
-					<g:Button ui:field="opslaan">Opslaan</g:Button>
+					<g:Label text="Bereidingstijd:"/>
+				</g:customCell>
+				<g:customCell>
+					<g:TextBox ui:field="bereidingsTijd"/>
+				</g:customCell>
+				<g:customCell>
+					<g:ListBox ui:field="tijdEenheid"/>
+				</g:customCell>
+			</g:row>
+			<g:row>
+				<g:customCell>
+					<g:Label text="Bereiding:"/>
+				</g:customCell>
+				<g:customCell>
+					<g:TextArea width="246px" height="204px" ui:field="bereiding"/>
 				</g:customCell>
 			</g:row>
 		</g:Grid>
@@ -57,5 +73,6 @@
 				</g:HorizontalPanel>
 			</g:FormPanel>
 		<g:HorizontalPanel ui:field="tumbnails" height="30px" />
+		<g:Button ui:field="opslaan">Opslaan</g:Button>
 	</g:HTMLPanel>
 </ui:UiBinder> 
