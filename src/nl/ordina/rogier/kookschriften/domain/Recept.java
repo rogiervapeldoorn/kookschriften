@@ -1,7 +1,9 @@
 package nl.ordina.rogier.kookschriften.domain;
 
+import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.PrePersist;
@@ -21,11 +23,19 @@ public class Recept {
     private String naamRecept;
     private SoortRecept soortRecept;
     private String afkomstigVan;
-    private List<String> ingredienten;
-    private Integer bereidingTijd;
+    private String bereiding;
+    private String bereidingsTijd;
+    private TijdEenheid bereidingsTijdEenheid;
     private List<String> uploadedImages;
-    public Integer getBereidingTijd() {
-        return bereidingTijd;
+    @Embedded 
+    private List<IngredientRegel> ingredienten=new ArrayList<IngredientRegel>();
+    
+    public List<IngredientRegel> getIngredienten() {
+        return ingredienten;
+    }
+
+    public void setIngredienten(List<IngredientRegel> ingredienten) {
+        this.ingredienten = ingredienten;
     }
 
     public List<String> getUploadedImages() {
@@ -87,15 +97,7 @@ public class Recept {
         this.afkomstigVan = afkomstigVan;
     }
 
-    public List<String> getIngredienten() {
-        return ingredienten;
-    }
-
-    public void setIngredienten(List<String> ingredienten) {
-        this.ingredienten = ingredienten;
-    }
-
-    public String getBereiding() {
+       public String getBereiding() {
         return bereiding;
     }
 
@@ -118,10 +120,6 @@ public class Recept {
     public void setBereidingsTijdEenheid(TijdEenheid bereidingsTijdEenheid) {
         this.bereidingsTijdEenheid = bereidingsTijdEenheid;
     }
-
-    private String bereiding;
-    private String bereidingsTijd;
-    private TijdEenheid bereidingsTijdEenheid;
 
     /**
      * Auto-increment version # whenever persisted

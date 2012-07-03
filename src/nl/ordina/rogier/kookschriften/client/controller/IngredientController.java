@@ -1,8 +1,12 @@
 package nl.ordina.rogier.kookschriften.client.controller;
 
 import nl.ordina.rogier.kookschriften.client.ExpensesRequestFactory;
-import nl.ordina.rogier.kookschriften.client.GewichtEenheden;
+import nl.ordina.rogier.kookschriften.client.GewichtEenheid;
+import nl.ordina.rogier.kookschriften.client.IngredientRegelRequest;
+import nl.ordina.rogier.kookschriften.client.IngredientRequest;
 import nl.ordina.rogier.kookschriften.client.view.IngredientView;
+import nl.ordina.rogier.kookschriften.shared.proxy.IngredientProxy;
+import nl.ordina.rogier.kookschriften.shared.proxy.IngredientRegelProxy;
 
 import com.google.gwt.core.client.GWT;
 import com.google.web.bindery.event.shared.EventBus;
@@ -23,14 +27,16 @@ public class IngredientController {
     }
 
     private void init() {
-	GewichtEenheden[] gewichtEenhedenArray=GewichtEenheden.values();
-	for (GewichtEenheden gewichtEenheid : gewichtEenhedenArray) {
+	GewichtEenheid[] gewichtEenhedenArray=GewichtEenheid.values();
+	for (GewichtEenheid gewichtEenheid : gewichtEenhedenArray) {
 	    ingredient.Eenheid.addItem(gewichtEenheid.toString());
 	}
 
     }
 
     private void bind() {
-	
     }
+    
+   
+
 }

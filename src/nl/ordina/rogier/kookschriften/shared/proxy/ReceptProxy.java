@@ -12,8 +12,6 @@ import com.google.web.bindery.requestfactory.shared.ProxyFor;
 
 @ProxyFor(value=Recept.class, locator=ReceptLocator.class)
 public interface ReceptProxy extends EntityProxy  {
-    public Integer getBereidingTijd();
-    public void setBereidingTijd(Integer bereidingTijd);
     public Long getId();
     public void setId(Long id);
     public Integer getVersion();
@@ -26,8 +24,6 @@ public interface ReceptProxy extends EntityProxy  {
     public void setSoortRecept(SoortRecept soortRecept);
     public String getAfkomstigVan();
     public void setAfkomstigVan(String afkomstigVan);
-    public List<String> getIngredienten();
-    public void setIngredienten(List<String> ingredienten);
     public String getBereiding();
     public void setBereiding(String bereiding);
     public String getBereidingsTijd();
@@ -36,5 +32,7 @@ public interface ReceptProxy extends EntityProxy  {
     public void setBereidingsTijdEenheid(TijdEenheid bereidingsTijdEenheid);
     public List<String> getUploadedImages();
     public void setUploadedImages(List<String> uploadedImages);
+    public void setIngredienten(List<IngredientRegelProxy> ingredienten );
+    public List<IngredientRegelProxy> getIngredienten();
     
 }

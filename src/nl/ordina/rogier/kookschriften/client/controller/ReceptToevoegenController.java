@@ -11,6 +11,7 @@ import nl.ordina.rogier.kookschriften.client.model.HistoryManager;
 import nl.ordina.rogier.kookschriften.client.view.HistoryToken;
 import nl.ordina.rogier.kookschriften.client.view.IngredientView;
 import nl.ordina.rogier.kookschriften.client.view.ReceptToevoegenView;
+import nl.ordina.rogier.kookschriften.shared.proxy.IngredientRegelProxy;
 import nl.ordina.rogier.kookschriften.shared.proxy.ReceptProxy;
 import nl.ordina.rogier.kookschriften.shared.proxy.UploadedImageProxy;
 
@@ -146,8 +147,13 @@ public class ReceptToevoegenController {
 	receptProxy.setNaamRecept(receptToevoegen.naamRecept.getValue());
 	receptProxy.setAfkomstigVan(receptToevoegen.afkomstigVan.getValue());
 	receptProxy.setUploadedImages(uploadedImages);
+	List<IngredientRegelProxy> list=new ArrayList<IngredientRegelProxy>();
 	for (int i=0; i<receptToevoegen.ingredienten.getWidgetCount();i++){
+	    IngredientView ingredientView=(IngredientView)receptToevoegen.ingredienten.getWidget(i);
+	    IngredientRegelProxy ingredientRegelProxy=ingredientView.getIngredientRegelProxy(receptRequest);
+	    list.add(ingredientRegelProxy);
 	}
+	receptProxy.setIngredienten(list);
 	Request<Void> saveRequest = receptRequest.save(receptProxy);
 	saveRequest.fire(new Receiver<Void>() {
 

@@ -7,5 +7,7 @@ public interface ExpensesRequestFactory extends RequestFactory {
     ReceptRequest receptRequest();
     UploadUrlRequest uploadUrlRequest();
     UploadedImageRequest uploadedImageRequest();
+    IngredientRegelRequest ingredientRegelRequest();
+    IngredientRequest ingredientRequest();
 
   }

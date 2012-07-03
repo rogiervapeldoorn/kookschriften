@@ -8,6 +8,7 @@ import nl.ordina.rogier.kookschriften.shared.proxy.ReceptProxy;
 import com.google.web.bindery.requestfactory.shared.Request;
 import com.google.web.bindery.requestfactory.shared.RequestContext;
 import com.google.web.bindery.requestfactory.shared.Service;
+import com.googlecode.objectify.Key;
 
 @Service(ReceptDao.class)
 public interface ReceptRequest extends RequestContext{

@@ -1,8 +1,10 @@
 package nl.ordina.rogier.kookschriften.server.service;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.List;
 
+import nl.ordina.rogier.kookschriften.domain.IngredientRegel;
 import nl.ordina.rogier.kookschriften.domain.Recept;
 
 import com.googlecode.objectify.Key;
@@ -17,6 +19,7 @@ import com.googlecode.objectify.util.DAOBase;
     static
 	{
 		ObjectifyService.register(Recept.class);
+		ObjectifyService.register(IngredientRegel.class);
 	}
 
     public static List<Recept> findAllRecepten()
@@ -46,7 +49,7 @@ import com.googlecode.objectify.util.DAOBase;
     public static Void save(Recept recept)
     {
 	Objectify objectify=ObjectifyService.begin();
-	objectify.put(recept);
+	Key<Recept> receptKey=objectify.put(recept);
 	return null;
     }
 }
