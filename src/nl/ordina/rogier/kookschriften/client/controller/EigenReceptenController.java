@@ -4,11 +4,14 @@ import java.util.List;
 
 import nl.ordina.rogier.kookschriften.client.ExpensesRequestFactory;
 import nl.ordina.rogier.kookschriften.client.ReceptRequest;
+import nl.ordina.rogier.kookschriften.client.model.HistoryManager;
 import nl.ordina.rogier.kookschriften.client.view.EigenReceptenView;
+import nl.ordina.rogier.kookschriften.client.view.HistoryToken;
 import nl.ordina.rogier.kookschriften.shared.proxy.ReceptProxy;
 
 import com.google.gwt.core.client.GWT;
-import com.google.gwt.user.cellview.client.DataGrid;
+import com.google.gwt.event.dom.client.ClickEvent;
+import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.user.cellview.client.TextColumn;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.view.client.SelectionChangeEvent;
@@ -20,12 +23,27 @@ import com.google.web.bindery.requestfactory.shared.Request;
 
 public class EigenReceptenController {
     EigenReceptenView eigenRecepten;
+    HistoryManager historyManager;
     private final ExpensesRequestFactory requestFactory = GWT.create(ExpensesRequestFactory.class);
 
-    public EigenReceptenController(EigenReceptenView eigenRecepten) {
+    public EigenReceptenController(EigenReceptenView eigenRecepten,HistoryManager historyManager) {
 	this.eigenRecepten = eigenRecepten;
+	this.historyManager=historyManager;
+	bind();
 	getEigenRecepten();
     }
+    private void bind(){
+	eigenRecepten.toevoegen.addClickHandler(new ClickHandler() {
+	    
+	    @Override
+	    public void onClick(ClickEvent event) {
+		historyManager.changeValue(HistoryToken.ReceptToevoegen);
+		HistoryToken.ReceptToevoegen.fire();
+	    }
+	});
+	
+    }
+    
 
     public void getEigenRecepten() {
 	final EventBus eventBus = new SimpleEventBus();
