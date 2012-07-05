@@ -29,12 +29,9 @@
 					<g:Label text="Ingrediënten:"/>
 				</g:customCell>
 				<g:customCell>
-					<g:HorizontalPanel width="268px">
+					<g:HorizontalPanel width="645px">
 						<g:VerticalPanel ui:field="ingredienten"/>
-						<g:VerticalPanel>
-							<g:Button ui:field="lessLines" text="-" width="24" height="30"/>
-							<g:Button ui:field="moreLines" text="+" width="24" height="30"/>
-						</g:VerticalPanel>
+						<g:VerticalPanel/>
 					</g:HorizontalPanel>
 				</g:customCell>
 			</g:row>
@@ -51,10 +48,10 @@
 					<g:Label text="Bereidingstijd:"/>
 				</g:customCell>
 				<g:customCell>
-					<g:TextBox ui:field="bereidingsTijd"/>
-				</g:customCell>
-				<g:customCell>
-					<g:ListBox ui:field="tijdEenheid"/>
+					<g:HorizontalPanel>
+						<g:TextBox ui:field="bereidingsTijd"/>
+						<g:ListBox ui:field="tijdEenheid"/>
+					</g:HorizontalPanel>
 				</g:customCell>
 			</g:row>
 			<g:row>
@@ -62,13 +59,13 @@
 					<g:Label text="Bereiding:"/>
 				</g:customCell>
 				<g:customCell>
-					<g:TextArea width="246px" height="204px" ui:field="bereiding"/>
+					<g:TextArea width="649px" height="230px" ui:field="bereiding"/>
 				</g:customCell>
 			</g:row>
 		</g:Grid>
 		<g:FormPanel height="39px" ui:field="uploadForm">
-				<g:HorizontalPanel width="100%" height="39px">
-					<g:FileUpload ui:field="uploadField" />
+				<g:HorizontalPanel width="100%" height="39px" horizontalAlignment="ALIGN_LEFT">
+					<g:FileUpload ui:field="uploadField" width="553px" />
 					<g:Button ui:field="uploadButton" text="upload" />
 				</g:HorizontalPanel>
 			</g:FormPanel>

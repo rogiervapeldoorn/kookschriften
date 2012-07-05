@@ -8,8 +8,8 @@
 	</ui:style>
 	<g:HTMLPanel>
 		<h1>Eigen recepten</h1>
-		<p1:DataGrid width="100%" height="357px" ui:field="dataGrid"/>
-		<p1:SimplePager location="CENTER"/>
+		<p1:DataGrid width="100%" height="461px" ui:field="dataGrid"/>
+		<p1:SimplePager location="CENTER" ui:field="pager"/>
 		<g:Button ui:field="toevoegen" text="Toevoegen">Toevoegen</g:Button>
 		
 	</g:HTMLPanel>

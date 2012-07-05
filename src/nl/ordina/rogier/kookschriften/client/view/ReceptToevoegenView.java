@@ -38,8 +38,6 @@ public class ReceptToevoegenView extends Composite implements HasText {
     @UiField
     public ListBox soortRecept;
     @UiField
-    public TextBox afkomstigVan;
-    @UiField
     public Button opslaan;
     @UiField
     public HorizontalPanel tumbnails;
@@ -49,12 +47,11 @@ public class ReceptToevoegenView extends Composite implements HasText {
     public Button uploadButton;
     @UiField
     public FormPanel uploadForm;
-    @UiField public Button moreLines;
-    @UiField public Button lessLines;
     @UiField public VerticalPanel ingredienten;
     @UiField public TextBox bereidingsTijd;
     @UiField public ListBox tijdEenheid;
     @UiField public TextArea bereiding;
+    @UiField public TextBox afkomstigVan;
 
     public ReceptToevoegenView(HistoryManager historyManager) {
 	initWidget(uiBinder.createAndBindUi(this));

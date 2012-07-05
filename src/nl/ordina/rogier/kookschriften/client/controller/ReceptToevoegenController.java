@@ -77,26 +77,7 @@ public class ReceptToevoegenController {
 		save();
 	    }
 	});
-	receptToevoegen.moreLines.addClickHandler(new ClickHandler() {
-
-	    @Override
-	    public void onClick(ClickEvent event) {
-		IngredientView ingredient = new IngredientView();
-		if (receptToevoegen.ingredienten.getWidgetCount() < 40) {
-		    receptToevoegen.ingredienten.add(ingredient);
-		}
-	    }
-	});
-	receptToevoegen.lessLines.addClickHandler(new ClickHandler() {
-
-	    @Override
-	    public void onClick(ClickEvent event) {
-		if (receptToevoegen.ingredienten.getWidgetCount() > 2) {
-		    receptToevoegen.ingredienten.remove(receptToevoegen.ingredienten.getWidgetCount());
-		}
-
-	    }
-	});
+	
 
 	receptToevoegen.uploadForm.addSubmitCompleteHandler(new FormPanel.SubmitCompleteHandler() {
 

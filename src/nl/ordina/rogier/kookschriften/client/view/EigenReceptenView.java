@@ -13,6 +13,7 @@ import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.HasText;
 import com.google.gwt.user.client.ui.Widget;
+import com.google.gwt.user.cellview.client.SimplePager;
 
 public class EigenReceptenView extends Composite implements HasText {
 
@@ -21,18 +22,19 @@ public class EigenReceptenView extends Composite implements HasText {
     public Button toevoegen;
     @UiField
     public DataGrid<ReceptProxy> dataGrid;
-        
+    @UiField
+    public SimplePager pager;
+
     interface EigenReceptenUiBinder extends UiBinder<Widget, EigenReceptenView> {
-	
+
     }
 
     public EigenReceptenView(HistoryManager historyManager) {
 	initWidget(uiBinder.createAndBindUi(this));
-	EigenReceptenController eigenReceptenController=new EigenReceptenController(this,historyManager);
-	EigenReceptenManager eigenReceptenManager=new EigenReceptenManager(eigenReceptenController);
+	EigenReceptenController eigenReceptenController = new EigenReceptenController(this, historyManager);
+	EigenReceptenManager eigenReceptenManager = new EigenReceptenManager(eigenReceptenController);
     }
 
-   
     public void setText(String text) {
     }
 
