@@ -77,7 +77,6 @@ public class ReceptToevoegenController {
 		save();
 	    }
 	});
-	
 
 	receptToevoegen.uploadForm.addSubmitCompleteHandler(new FormPanel.SubmitCompleteHandler() {
 
@@ -85,31 +84,18 @@ public class ReceptToevoegenController {
 	    public void onSubmitComplete(SubmitCompleteEvent event) {
 		receptToevoegen.uploadForm.reset();
 		startNewBlobstoreSession();
-		String key = event.getResults();
-		UploadedImageRequest uploadedImageRequest = requestFactory.uploadedImageRequest();
-		Request<UploadedImageProxy> request = uploadedImageRequest.findUploadedImageWithKey(key);
-		request.fire(new Receiver<UploadedImageProxy>() {
-		    @Override
-		    public void onSuccess(UploadedImageProxy response) {
-			uploadedImages.add(response.getId().toString());
-			Image image = new Image();
-			image.setUrl(response.getServingUrl());
-
-			final PopupPanel imagePopup = new PopupPanel(true);
-			imagePopup.setAnimationEnabled(true);
-			imagePopup.setWidget(image);
-			imagePopup.setGlassEnabled(true);
-			imagePopup.setAutoHideEnabled(true);
-			imagePopup.center();
-			imagePopup.setHeight("100px");
-			receptToevoegen.tumbnails.add(imagePopup);
-		    }
-
-		    @Override
-		    public void onFailure(ServerFailure error) {
-			System.out.println(error.getMessage());
-		    }
-		});
+		String imageUrl = event.getResults();
+		uploadedImages.add(imageUrl);
+		Image image = new Image();
+		image.setUrl(imageUrl+"=s200");
+		final PopupPanel imagePopup = new PopupPanel(true);
+		imagePopup.setAnimationEnabled(true);
+		imagePopup.setWidget(image);
+		imagePopup.setGlassEnabled(true);
+		imagePopup.setAutoHideEnabled(true);
+		imagePopup.center();
+		imagePopup.setHeight("100px");
+		receptToevoegen.tumbnails.add(imagePopup);
 
 	    }
 	});

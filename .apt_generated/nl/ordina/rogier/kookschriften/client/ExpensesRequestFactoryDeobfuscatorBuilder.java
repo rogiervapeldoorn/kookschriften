@@ -13,11 +13,11 @@ withOperation(new OperationKey("FKuor4aGiX_TWyh9xjSupFDetdo="),
   .withMethodName("getUploadUrl")
   .withRequestContext("nl.ordina.rogier.kookschriften.client.UploadUrlRequest")
   .build());
-withOperation(new OperationKey("kkGPpP7fikOhirkKVIRBGNIvZ8o="),
+withOperation(new OperationKey("XyQxfsjrJpC$QC3SSQMVlxjLGdc="),
   new OperationData.Builder()
   .withClientMethodDescriptor("(Ljava/lang/String;)Lcom/google/web/bindery/requestfactory/shared/Request;")
   .withDomainMethodDescriptor("(Ljava/lang/String;)Lnl/ordina/rogier/kookschriften/domain/UploadedImage;")
-  .withMethodName("findUploadedImageWithKey")
+  .withMethodName("findUploadedImageWithId")
   .withRequestContext("nl.ordina.rogier.kookschriften.client.UploadedImageRequest")
   .build());
 withOperation(new OperationKey("DRVlSooq0QxBy9o83bAEd2DzXIg="),

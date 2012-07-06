@@ -28,7 +28,7 @@ public class IngredientRegel implements Serializable {
     }
     private Integer version = 0;
     private String ingredient;
-    private Long gewicht;
+    private Double gewicht;
     private GewichtEenheid gewichtEenheid;
     
     public String getIngredient() {
@@ -39,11 +39,11 @@ public class IngredientRegel implements Serializable {
         this.ingredient = ingredient;
     }
 
-    public Long getGewicht() {
+    public Double getGewicht() {
         return gewicht;
     }
 
-    public void setGewicht(Long gewicht) {
+    public void setGewicht(Double gewicht) {
         this.gewicht = gewicht;
     }
 

@@ -17,7 +17,7 @@ public class UploadedImageLocator extends Locator<UploadedImage, Long> {
     
     public UploadedImage getUploadedImage(String key)
     {
-	UploadedImage image = UploadedImageDao.findUploadedImageWithKey(key);
+	UploadedImage image = UploadedImageDao.findUploadedImageWithId(key);
 	return image;
     }
 

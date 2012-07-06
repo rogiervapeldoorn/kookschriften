@@ -36,10 +36,10 @@ public class UploadedImageDao extends DAOBase{
 	return result;
     }
     
-    public static UploadedImage findUploadedImageWithKey(String key)
+    public static UploadedImage findUploadedImageWithId(String id)
     {
 	Objectify objectify=ObjectifyService.begin();
-	UploadedImage uploadedImages = objectify.get(UploadedImage.class,new Long(key));
+	UploadedImage uploadedImages = objectify.get(UploadedImage.class,new Long(id));
 	return uploadedImages;
     }
     

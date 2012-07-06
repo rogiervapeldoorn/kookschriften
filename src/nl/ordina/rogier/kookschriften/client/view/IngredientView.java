@@ -22,6 +22,7 @@ import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.HasText;
 import com.google.gwt.user.client.ui.IntegerBox;
 import com.google.gwt.user.client.ui.ListBox;
+import com.google.gwt.user.client.ui.SuggestBox;
 import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.Widget;
 
@@ -35,12 +36,12 @@ public class IngredientView extends Composite implements HasText, HasHandlers {
 
     private static IngredientUiBinder uiBinder = GWT.create(IngredientUiBinder.class);
     @UiField
-    public TextBox Ingredient;
+    public SuggestBox Ingredient;
     @UiField
     public ListBox Eenheid;
     @UiField
-    public IntegerBox Gewicht;
-
+    public TextBox Gewicht;
+    
     interface IngredientUiBinder extends UiBinder<Widget, IngredientView> {
     }
 
@@ -49,11 +50,17 @@ public class IngredientView extends Composite implements HasText, HasHandlers {
 	IngredientController ingredientController = new IngredientController(this);
 	IngredientManager ingredientManager = new IngredientManager(ingredientController);
 	handlerManager = new HandlerManager(this);
-	Gewicht.addValueChangeHandler(new ValueChangeHandler<Integer>() {
+	Gewicht.addValueChangeHandler(new ValueChangeHandler<String>() {
 
 	    @Override
-	    public void onValueChange(ValueChangeEvent<Integer> event) {
-		if (event.getValue() != null && event.getValue() != 0) {
+	    public void onValueChange(ValueChangeEvent<String> event) {
+		if (event.getValue() != null && event.getValue() != "") {
+		    try {
+			new Double(event.getValue());
+			Gewicht.setStyleName("gwt-DialogBox");
+		    } catch (NumberFormatException e) {
+			Gewicht.setStyleName("gwt-DialogBox-error");
+		    }
 		    gewichtHasValue = true;
 		} else {
 		    gewichtHasValue = false;
@@ -91,8 +98,8 @@ public class IngredientView extends Composite implements HasText, HasHandlers {
 
     public IngredientRegelProxy getIngredientRegelProxy(ReceptRequest receptRequest) {
 	IngredientRegelProxy ingredientRegelProxy = receptRequest.create(IngredientRegelProxy.class);
-	if (Gewicht != null && Gewicht.getValue() != null) {
-	    ingredientRegelProxy.setGewicht(Gewicht.getValue().longValue());
+	if (Gewicht != null && Gewicht.getValue() != null&&Gewicht.getValue().length()>0) {
+	    ingredientRegelProxy.setGewicht(new Double(Gewicht.getValue()));
 	}
 	ingredientRegelProxy.setGewichtEenheid(GewichtEenheid.valueOf(Eenheid.getValue(Eenheid.getSelectedIndex())));
 	ingredientRegelProxy.setIngredient(Ingredient.getValue());

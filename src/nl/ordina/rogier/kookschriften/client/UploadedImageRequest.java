@@ -9,5 +9,5 @@ import com.google.web.bindery.requestfactory.shared.Service;
 
 @Service(UploadedImageDao.class)
 public interface UploadedImageRequest extends RequestContext{
-    Request<UploadedImageProxy> findUploadedImageWithKey(String encodedKey);
+    Request<UploadedImageProxy> findUploadedImageWithId(String id);
 }

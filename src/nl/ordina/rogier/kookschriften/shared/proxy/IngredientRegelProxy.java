@@ -10,8 +10,8 @@ import com.google.web.bindery.requestfactory.shared.ValueProxy;
 public interface IngredientRegelProxy extends ValueProxy  {
     public String getIngredient();
     public void setIngredient(String ingredient);
-    public Long getGewicht();
-    public void setGewicht(Long	gewicht);
+    public Double getGewicht();
+    public void setGewicht(Double gewicht);
     public GewichtEenheid getGewichtEenheid();
     public void setGewichtEenheid(GewichtEenheid GewichtEenheden);
 }

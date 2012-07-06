@@ -4,10 +4,13 @@ import java.util.List;
 
 import nl.ordina.rogier.kookschriften.client.ExpensesRequestFactory;
 import nl.ordina.rogier.kookschriften.client.ReceptRequest;
+import nl.ordina.rogier.kookschriften.client.UploadedImageRequest;
 import nl.ordina.rogier.kookschriften.client.model.HistoryManager;
 import nl.ordina.rogier.kookschriften.client.view.EigenReceptenView;
 import nl.ordina.rogier.kookschriften.client.view.HistoryToken;
+import nl.ordina.rogier.kookschriften.client.view.ImageColumn;
 import nl.ordina.rogier.kookschriften.shared.proxy.ReceptProxy;
+import nl.ordina.rogier.kookschriften.shared.proxy.UploadedImageProxy;
 
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.ClickEvent;
@@ -52,7 +55,7 @@ public class EigenReceptenController {
 
     public void getEigenRecepten() {
 	eigenRecepten.pager.setDisplay(eigenRecepten.dataGrid);
-	eigenRecepten.pager.setPageSize(10);
+	eigenRecepten.pager.setPageSize(6);
 	final ListDataProvider<ReceptProxy> dataProvider = new ListDataProvider<ReceptProxy>();
 	dataProvider.addDataDisplay(eigenRecepten.dataGrid);
 	final EventBus eventBus = new SimpleEventBus();
@@ -71,6 +74,7 @@ public class EigenReceptenController {
 			return object.getNaamRecept();
 		    }
 		};
+		
 		eigenRecepten.dataGrid.addColumn(naamReceptColumn, "Recept");
 		
 		TextColumn<ReceptProxy> urlColumn = new TextColumn<ReceptProxy>() {
@@ -78,14 +82,28 @@ public class EigenReceptenController {
 		    public String getValue(ReceptProxy object) {
 			String urls = "URLS:";
 			if (object.getUploadedImages() != null) {
-			    for (String url : object.getUploadedImages()) {
-
+			    for (String plaatjeId : object.getUploadedImages()) {
+				urls=urls+plaatjeId;
 			    }
 			}
 			return urls;
 		    }
 		};
 		eigenRecepten.dataGrid.addColumn(urlColumn, "URL");
+
+		ImageColumn<ReceptProxy> imageColumn=new ImageColumn<ReceptProxy>() {
+
+		    @Override
+		    public String getValue(ReceptProxy object) {
+			List<String> strings=object.getUploadedImages();
+			for (String url : strings) {
+			    return url+"=s100";
+			}
+			return null;
+		    }
+		};
+		
+		eigenRecepten.dataGrid.addColumn(imageColumn,"plaatje");
 
 		TextColumn<ReceptProxy> afkomstigVanColumn = new TextColumn<ReceptProxy>() {
 		    @Override

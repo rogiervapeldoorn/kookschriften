@@ -8,9 +8,9 @@
 	</ui:style>
 	<g:HTMLPanel>
 		<g:HorizontalPanel>
-			<g:TextBox ui:field="Ingredient" maxLength="50"/>
+			<g:SuggestBox ui:field="Ingredient" />
 			<g:Cell horizontalAlignment="ALIGN_CENTER" verticalAlignment="ALIGN_MIDDLE">
-				<g:IntegerBox height="23.5px" width="92px" ui:field="Gewicht" visibleLength="10"/>
+				<g:TextBox height="23.5px" width="92px" ui:field="Gewicht" visibleLength="10" styleName="gwt-DialogBox"/>
 			</g:Cell>
 			<g:ListBox ui:field="Eenheid"/>
 		</g:HorizontalPanel>
