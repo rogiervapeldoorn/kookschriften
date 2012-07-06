@@ -1,5 +1,8 @@
 package nl.ordina.rogier.kookschriften.client.view;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import nl.ordina.rogier.kookschriften.client.ExpensesRequestFactory;
 import nl.ordina.rogier.kookschriften.client.GewichtEenheid;
 import nl.ordina.rogier.kookschriften.client.ReceptRequest;
@@ -7,6 +10,7 @@ import nl.ordina.rogier.kookschriften.client.controller.IngredientController;
 import nl.ordina.rogier.kookschriften.client.events.NewIngredientEvent;
 import nl.ordina.rogier.kookschriften.client.events.NewIngredientEventHandler;
 import nl.ordina.rogier.kookschriften.client.model.IngredientManager;
+import nl.ordina.rogier.kookschriften.shared.proxy.IngredientProxy;
 import nl.ordina.rogier.kookschriften.shared.proxy.IngredientRegelProxy;
 
 import com.google.gwt.core.client.GWT;
@@ -20,9 +24,10 @@ import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.HasText;
-import com.google.gwt.user.client.ui.IntegerBox;
 import com.google.gwt.user.client.ui.ListBox;
+import com.google.gwt.user.client.ui.MultiWordSuggestOracle;
 import com.google.gwt.user.client.ui.SuggestBox;
+import com.google.gwt.user.client.ui.SuggestOracle;
 import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.Widget;
 
@@ -33,9 +38,11 @@ public class IngredientView extends Composite implements HasText, HasHandlers {
     private HandlerManager handlerManager;
 
     private final ExpensesRequestFactory requestFactory = GWT.create(ExpensesRequestFactory.class);
-
+    
+    public final MultiWordSuggestOracle ingredients = new MultiWordSuggestOracle();
+    public List<String> listofIngredients=new ArrayList<String>();
     private static IngredientUiBinder uiBinder = GWT.create(IngredientUiBinder.class);
-    @UiField
+    @UiField(provided = true) 
     public SuggestBox Ingredient;
     @UiField
     public ListBox Eenheid;
@@ -46,9 +53,11 @@ public class IngredientView extends Composite implements HasText, HasHandlers {
     }
 
     public IngredientView() {
+	Ingredient=new SuggestBox(ingredients);
 	initWidget(uiBinder.createAndBindUi(this));
 	IngredientController ingredientController = new IngredientController(this);
 	IngredientManager ingredientManager = new IngredientManager(ingredientController);
+	
 	handlerManager = new HandlerManager(this);
 	Gewicht.addValueChangeHandler(new ValueChangeHandler<String>() {
 
@@ -100,10 +109,11 @@ public class IngredientView extends Composite implements HasText, HasHandlers {
 	IngredientRegelProxy ingredientRegelProxy = receptRequest.create(IngredientRegelProxy.class);
 	if (Gewicht != null && Gewicht.getValue() != null&&Gewicht.getValue().length()>0) {
 	    ingredientRegelProxy.setGewicht(new Double(Gewicht.getValue()));
+	    ingredientRegelProxy.setGewichtEenheid(GewichtEenheid.valueOf(Eenheid.getValue(Eenheid.getSelectedIndex())));
+	    ingredientRegelProxy.setIngredient(Ingredient.getValue().toLowerCase());
+	    return ingredientRegelProxy;
 	}
-	ingredientRegelProxy.setGewichtEenheid(GewichtEenheid.valueOf(Eenheid.getValue(Eenheid.getSelectedIndex())));
-	ingredientRegelProxy.setIngredient(Ingredient.getValue());
-	return ingredientRegelProxy;
+	return null;
     }
 
     @Override

@@ -8,7 +8,7 @@
 	</ui:style>
 	<g:HTMLPanel>
 		<g:HorizontalPanel>
-			<g:SuggestBox ui:field="Ingredient" />
+			<g:SuggestBox ui:field="Ingredient" popupStyleName="gwt-SuggestBoxPopup" width="30" />
 			<g:Cell horizontalAlignment="ALIGN_CENTER" verticalAlignment="ALIGN_MIDDLE">
 				<g:TextBox height="23.5px" width="92px" ui:field="Gewicht" visibleLength="10" styleName="gwt-DialogBox"/>
 			</g:Cell>

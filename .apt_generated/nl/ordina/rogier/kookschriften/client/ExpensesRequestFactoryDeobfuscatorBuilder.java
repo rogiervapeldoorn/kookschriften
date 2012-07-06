@@ -27,6 +27,20 @@ withOperation(new OperationKey("DRVlSooq0QxBy9o83bAEd2DzXIg="),
   .withMethodName("save")
   .withRequestContext("nl.ordina.rogier.kookschriften.client.IngredientRequest")
   .build());
+withOperation(new OperationKey("_J2mk96byN3Ho$UGzY3_E4e8df8="),
+  new OperationData.Builder()
+  .withClientMethodDescriptor("(Ljava/util/List;)Lcom/google/web/bindery/requestfactory/shared/Request;")
+  .withDomainMethodDescriptor("(Ljava/util/List;)Ljava/lang/Void;")
+  .withMethodName("saveAll")
+  .withRequestContext("nl.ordina.rogier.kookschriften.client.IngredientRequest")
+  .build());
+withOperation(new OperationKey("YxiZjW4fXUEk8N5$NZTNm2Ba39Q="),
+  new OperationData.Builder()
+  .withClientMethodDescriptor("()Lcom/google/web/bindery/requestfactory/shared/Request;")
+  .withDomainMethodDescriptor("()Ljava/util/List;")
+  .withMethodName("findAll")
+  .withRequestContext("nl.ordina.rogier.kookschriften.client.IngredientRequest")
+  .build());
 withOperation(new OperationKey("TyEbf6xMwy71fbg$GKIAbcjVS7o="),
   new OperationData.Builder()
   .withClientMethodDescriptor("(Lnl/ordina/rogier/kookschriften/shared/proxy/IngredientRegelProxy;)Lcom/google/web/bindery/requestfactory/shared/Request;")

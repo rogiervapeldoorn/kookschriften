@@ -4,25 +4,23 @@ import java.util.ArrayList;
 import java.util.List;
 
 import nl.ordina.rogier.kookschriften.client.ExpensesRequestFactory;
+import nl.ordina.rogier.kookschriften.client.IngredientRequest;
 import nl.ordina.rogier.kookschriften.client.ReceptRequest;
 import nl.ordina.rogier.kookschriften.client.TijdEenheid;
 import nl.ordina.rogier.kookschriften.client.UploadUrlRequest;
-import nl.ordina.rogier.kookschriften.client.UploadedImageRequest;
 import nl.ordina.rogier.kookschriften.client.events.NewIngredientEvent;
 import nl.ordina.rogier.kookschriften.client.events.NewIngredientEventHandler;
 import nl.ordina.rogier.kookschriften.client.model.HistoryManager;
 import nl.ordina.rogier.kookschriften.client.view.HistoryToken;
 import nl.ordina.rogier.kookschriften.client.view.IngredientView;
 import nl.ordina.rogier.kookschriften.client.view.ReceptToevoegenView;
+import nl.ordina.rogier.kookschriften.shared.proxy.IngredientProxy;
 import nl.ordina.rogier.kookschriften.shared.proxy.IngredientRegelProxy;
 import nl.ordina.rogier.kookschriften.shared.proxy.ReceptProxy;
-import nl.ordina.rogier.kookschriften.shared.proxy.UploadedImageProxy;
 
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
-import com.google.gwt.event.shared.GwtEvent;
-import com.google.gwt.event.shared.HasHandlers;
 import com.google.gwt.user.client.ui.FormPanel;
 import com.google.gwt.user.client.ui.FormPanel.SubmitCompleteEvent;
 import com.google.gwt.user.client.ui.Image;
@@ -31,7 +29,6 @@ import com.google.web.bindery.event.shared.EventBus;
 import com.google.web.bindery.event.shared.SimpleEventBus;
 import com.google.web.bindery.requestfactory.shared.Receiver;
 import com.google.web.bindery.requestfactory.shared.Request;
-import com.google.web.bindery.requestfactory.shared.ServerFailure;
 
 public class ReceptToevoegenController {
 
@@ -143,10 +140,31 @@ public class ReceptToevoegenController {
 	    @Override
 	    public void onSuccess(Void response) {
 
+
 		historyManager.changeValue(HistoryToken.EigenRecepten);
 		HistoryToken.EigenRecepten.fire();
+		
 	    }
 
+	});
+	IngredientRequest ingredientRequest = requestFactory.ingredientRequest();
+	List<IngredientProxy> lists = new ArrayList<IngredientProxy>();
+	for (int i = 0; i < receptToevoegen.ingredienten.getWidgetCount(); i++) {
+	    IngredientView ingredientView = (IngredientView) receptToevoegen.ingredienten.getWidget(i);
+	    IngredientProxy ingredientProxy= ingredientRequest.create(IngredientProxy.class);
+	    ingredientProxy.setIngredient(ingredientView.Ingredient.getValue());
+	    if (!ingredientView.listofIngredients.contains(ingredientView.Ingredient.getValue()))
+	    {
+		lists.add(ingredientProxy);
+	    }
+	}
+	Request<Void> saveRequestI =ingredientRequest.saveAll(lists);
+	saveRequestI.fire(new Receiver<Void>() {
+
+	    @Override
+	    public void onSuccess(Void response) {
+		
+	    }
 	});
 
     }

@@ -20,9 +20,16 @@ import com.googlecode.objectify.util.DAOBase;
 		ObjectifyService.register(Ingredient.class);
 	}
 
-    public static List<Ingredient> findAllRecepten()
+    public static List<Ingredient> findAll()
     {
-	return null;
+	Objectify objectify=ObjectifyService.begin();
+	List<Ingredient> result=new ArrayList<Ingredient>();
+	Query<Ingredient> ingredienten=objectify.query(Ingredient.class);
+	for (Ingredient ingredient : ingredienten) {
+	    result.add(ingredient);
+	}
+	return result;
+	
     }
     public static List<Ingredient> findMyIngredient()
     {
@@ -48,6 +55,12 @@ import com.googlecode.objectify.util.DAOBase;
     {
 	Objectify objectify=ObjectifyService.begin();
 	objectify.put(ingredient);
+	return null;
+    }
+    public static Void saveAll(List<Ingredient> ingredients )
+    {
+	Objectify objectify=ObjectifyService.begin();
+	objectify.put(ingredients);
 	return null;
     }
 }

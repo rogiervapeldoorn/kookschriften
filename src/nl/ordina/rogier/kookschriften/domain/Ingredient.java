@@ -4,8 +4,6 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.PrePersist;
 
-import nl.ordina.rogier.kookschriften.client.GewichtEenheid;
-
 @Entity
 public class Ingredient {
     @Id
