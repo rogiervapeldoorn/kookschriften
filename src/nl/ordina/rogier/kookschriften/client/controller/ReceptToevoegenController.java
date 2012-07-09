@@ -24,6 +24,7 @@ import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.user.client.ui.FormPanel;
 import com.google.gwt.user.client.ui.FormPanel.SubmitCompleteEvent;
 import com.google.gwt.user.client.ui.Image;
+import com.google.gwt.user.client.ui.MultiWordSuggestOracle;
 import com.google.gwt.user.client.ui.PopupPanel;
 import com.google.web.bindery.event.shared.EventBus;
 import com.google.web.bindery.event.shared.SimpleEventBus;
@@ -38,6 +39,9 @@ public class ReceptToevoegenController {
     HistoryManager historyManager;
     List<String> uploadedImages = new ArrayList<String>();
 
+    public final MultiWordSuggestOracle ingredients = new MultiWordSuggestOracle();
+    public List<String> listofIngredients=new ArrayList<String>();
+
     public ReceptToevoegenController(HistoryManager historyManager, ReceptToevoegenView receptToevoegen) {
 	final EventBus eventBus = new SimpleEventBus();
 	requestFactory.initialize(eventBus);
@@ -51,13 +55,30 @@ public class ReceptToevoegenController {
     private void init() {
 	UtilController.initSoortRecept(receptToevoegen.soortRecept);
 	UtilController.initTijdEenheid(receptToevoegen.tijdEenheid);
-	IngredientView ingredient = new IngredientView();
+	IngredientRequest ingredientRequest=requestFactory.ingredientRequest();
+	Request<List<IngredientProxy>> request=ingredientRequest.findAll();
+	request.fire(new Receiver<List<IngredientProxy>>() {
+
+	    @Override
+	    public void onSuccess(List<IngredientProxy> response) {
+		
+		for (IngredientProxy ingredientProxy : response) {
+		    ingredients.add(ingredientProxy.getIngredient());
+		    listofIngredients.add(ingredientProxy.getIngredient());
+		}
+		
+	    }
+	});
+
+	
+	
+	IngredientView ingredient = new IngredientView(ingredients,listofIngredients);
 	NewIngredientEventHandler newIngredientEventHandler = new NewIngredientEventHandler() {
 
 	    @Override
 	    public void onNewIngredient(NewIngredientEvent event) {
 		if (receptToevoegen.ingredienten.getWidgetCount() < 40) {
-		    IngredientView ingredient = new IngredientView();
+		    IngredientView ingredient = new IngredientView(ingredients,listofIngredients);
 		    receptToevoegen.ingredienten.add(ingredient);
 		    ingredient.addNewIngredientEventHandler(this);
 		}

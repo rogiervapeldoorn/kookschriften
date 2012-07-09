@@ -39,7 +39,7 @@ public class IngredientView extends Composite implements HasText, HasHandlers {
 
     private final ExpensesRequestFactory requestFactory = GWT.create(ExpensesRequestFactory.class);
     
-    public final MultiWordSuggestOracle ingredients = new MultiWordSuggestOracle();
+    public MultiWordSuggestOracle ingredients = new MultiWordSuggestOracle();
     public List<String> listofIngredients=new ArrayList<String>();
     private static IngredientUiBinder uiBinder = GWT.create(IngredientUiBinder.class);
     @UiField(provided = true) 
@@ -52,7 +52,9 @@ public class IngredientView extends Composite implements HasText, HasHandlers {
     interface IngredientUiBinder extends UiBinder<Widget, IngredientView> {
     }
 
-    public IngredientView() {
+    public IngredientView(MultiWordSuggestOracle ingredients,List<String> listofIngredients) {
+	this.ingredients=ingredients;
+	this.listofIngredients=listofIngredients;
 	Ingredient=new SuggestBox(ingredients);
 	initWidget(uiBinder.createAndBindUi(this));
 	IngredientController ingredientController = new IngredientController(this);

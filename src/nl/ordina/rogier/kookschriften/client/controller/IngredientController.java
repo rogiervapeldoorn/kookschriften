@@ -32,20 +32,6 @@ public class IngredientController{
 	for (GewichtEenheid gewichtEenheid : gewichtEenhedenArray) {
 	    ingredient.Eenheid.addItem(gewichtEenheid.toString());
 	}
-	IngredientRequest ingredientRequest=requestFactory.ingredientRequest();
-	Request<List<IngredientProxy>> request=ingredientRequest.findAll();
-	request.fire(new Receiver<List<IngredientProxy>>() {
-
-	    @Override
-	    public void onSuccess(List<IngredientProxy> response) {
-		
-		for (IngredientProxy ingredientProxy : response) {
-		    ingredient.ingredients.add(ingredientProxy.getIngredient());
-		    ingredient.listofIngredients.add(ingredientProxy.getIngredient());
-		}
-		
-	    }
-	});
     }
     
     private void bind() {
