@@ -3,14 +3,12 @@ package nl.ordina.rogier.kookschriften.client.view;
 import java.util.ArrayList;
 import java.util.List;
 
-import nl.ordina.rogier.kookschriften.client.ExpensesRequestFactory;
 import nl.ordina.rogier.kookschriften.client.GewichtEenheid;
 import nl.ordina.rogier.kookschriften.client.ReceptRequest;
 import nl.ordina.rogier.kookschriften.client.controller.IngredientController;
 import nl.ordina.rogier.kookschriften.client.events.NewIngredientEvent;
 import nl.ordina.rogier.kookschriften.client.events.NewIngredientEventHandler;
 import nl.ordina.rogier.kookschriften.client.model.IngredientManager;
-import nl.ordina.rogier.kookschriften.shared.proxy.IngredientProxy;
 import nl.ordina.rogier.kookschriften.shared.proxy.IngredientRegelProxy;
 
 import com.google.gwt.core.client.GWT;
@@ -27,7 +25,6 @@ import com.google.gwt.user.client.ui.HasText;
 import com.google.gwt.user.client.ui.ListBox;
 import com.google.gwt.user.client.ui.MultiWordSuggestOracle;
 import com.google.gwt.user.client.ui.SuggestBox;
-import com.google.gwt.user.client.ui.SuggestOracle;
 import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.Widget;
 
@@ -37,7 +34,6 @@ public class IngredientView extends Composite implements HasText, HasHandlers {
     private boolean ingredientHasValue = false;
     private HandlerManager handlerManager;
 
-    private final ExpensesRequestFactory requestFactory = GWT.create(ExpensesRequestFactory.class);
     
     public MultiWordSuggestOracle ingredients = new MultiWordSuggestOracle();
     public List<String> listofIngredients=new ArrayList<String>();
