@@ -70,8 +70,6 @@ public class ReceptToevoegenController {
 	    }
 	});
 
-	
-	
 	IngredientView ingredient = new IngredientView(ingredients,listofIngredients);
 	NewIngredientEventHandler newIngredientEventHandler = new NewIngredientEventHandler() {
 
@@ -114,6 +112,10 @@ public class ReceptToevoegenController {
 		imagePopup.center();
 		imagePopup.setHeight("100px");
 		receptToevoegen.tumbnails.add(imagePopup);
+		receptToevoegen.uploadField.setEnabled(true);
+		receptToevoegen.uploadButton.setEnabled(true);
+		receptToevoegen.uploadButton.setText("Upload");
+		
 
 	    }
 	});

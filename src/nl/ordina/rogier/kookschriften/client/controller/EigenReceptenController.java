@@ -37,11 +37,13 @@ public class EigenReceptenController {
 	bind();
 	getEigenRecepten();
     }
-    private void init(){
+
+    private void init() {
     }
+
     private void bind() {
 	eigenRecepten.pager.firstPage();
-	
+
 	eigenRecepten.toevoegen.addClickHandler(new ClickHandler() {
 
 	    @Override
@@ -67,23 +69,23 @@ public class EigenReceptenController {
 	    @Override
 	    public void onSuccess(List<ReceptProxy> response) {
 		dataProvider.setList(response);
-		
+
 		TextColumn<ReceptProxy> naamReceptColumn = new TextColumn<ReceptProxy>() {
 		    @Override
 		    public String getValue(ReceptProxy object) {
 			return object.getNaamRecept();
 		    }
 		};
-		
+
 		eigenRecepten.dataGrid.addColumn(naamReceptColumn, "Recept");
-		
+
 		TextColumn<ReceptProxy> urlColumn = new TextColumn<ReceptProxy>() {
 		    @Override
 		    public String getValue(ReceptProxy object) {
 			String urls = "URLS:";
 			if (object.getUploadedImages() != null) {
 			    for (String plaatjeId : object.getUploadedImages()) {
-				urls=urls+plaatjeId;
+				urls = urls + plaatjeId;
 			    }
 			}
 			return urls;
@@ -91,19 +93,23 @@ public class EigenReceptenController {
 		};
 		eigenRecepten.dataGrid.addColumn(urlColumn, "URL");
 
-		ImageColumn<ReceptProxy> imageColumn=new ImageColumn<ReceptProxy>() {
+		ImageColumn<ReceptProxy> imageColumn = new ImageColumn<ReceptProxy>() {
 
 		    @Override
 		    public String getValue(ReceptProxy object) {
-			List<String> strings=object.getUploadedImages();
-			for (String url : strings) {
-			    return url+"=s100";
+			if (object != null) {
+			    List<String> strings = object.getUploadedImages();
+			    if (strings != null) {
+				for (String url : strings) {
+				    return url + "=s100";
+				}
+			    }
 			}
 			return null;
 		    }
 		};
-		
-		eigenRecepten.dataGrid.addColumn(imageColumn,"plaatje");
+
+		eigenRecepten.dataGrid.addColumn(imageColumn, "plaatje");
 
 		TextColumn<ReceptProxy> afkomstigVanColumn = new TextColumn<ReceptProxy>() {
 		    @Override
@@ -112,13 +118,10 @@ public class EigenReceptenController {
 		    }
 		};
 		eigenRecepten.dataGrid.addColumn(afkomstigVanColumn, "Afkomstig van");
-		
+
 		eigenRecepten.dataGrid.setRowCount(response.size(), true);
 		eigenRecepten.dataGrid.setRowData(0, response);
 
-		
-		
-		
 		// Set row selector
 		final SingleSelectionModel<ReceptProxy> selectionModel = new SingleSelectionModel<ReceptProxy>();
 		eigenRecepten.dataGrid.setSelectionModel(selectionModel);

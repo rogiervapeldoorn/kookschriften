@@ -82,8 +82,10 @@ public class ReceptToevoegenView extends Composite implements HasText {
 
     @UiHandler("uploadButton")
     void onSubmit(ClickEvent e) {
-
 	uploadForm.submit();
+	uploadField.setEnabled(false);
+	uploadButton.setEnabled(false);
+	uploadButton.setText("...");
 
     }
 
