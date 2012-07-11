@@ -5,8 +5,6 @@ import java.util.List;
 
 import javax.persistence.Embedded;
 import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.PrePersist;
 
 import nl.ordina.rogier.kookschriften.client.SoortRecept;
 import nl.ordina.rogier.kookschriften.client.TijdEenheid;
@@ -15,10 +13,8 @@ import com.googlecode.objectify.annotation.Cached;
 
 @Cached
 @Entity
-public class Recept {
-    @Id
-    private Long id;
-    private Integer version = 0;
+public class Recept extends DatastoreObject {
+   
     private String email;
     private String naamRecept;
     private SoortRecept soortRecept;
@@ -49,22 +45,7 @@ public class Recept {
     public void setBereidingTijd(Integer bereidingTijd) {
     }
 
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public Integer getVersion() {
-        return version;
-    }
-
-    public void setVersion(Integer version) {
-        this.version = version;
-    }
-
+   
     public String getEmail() {
         return email;
     }
@@ -119,14 +100,6 @@ public class Recept {
 
     public void setBereidingsTijdEenheid(TijdEenheid bereidingsTijdEenheid) {
         this.bereidingsTijdEenheid = bereidingsTijdEenheid;
-    }
-
-    /**
-     * Auto-increment version # whenever persisted
-     */
-    @PrePersist
-    void onPersist() {
-	this.version++;
     }
 
     public Recept() {

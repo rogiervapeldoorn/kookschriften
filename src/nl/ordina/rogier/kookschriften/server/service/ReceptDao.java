@@ -42,6 +42,12 @@ import com.googlecode.objectify.util.DAOBase;
 	Recept recept = objectify.get(new Key<Recept>(Recept.class, id));
 	return recept;
     }
+    public static Recept findRecept(Long id)
+    {
+	Objectify objectify=ObjectifyService.begin();
+	Recept recept = objectify.get(Recept.class, id);
+	return recept;
+    }
     public void persist()
     {
 	System.out.println("persist");

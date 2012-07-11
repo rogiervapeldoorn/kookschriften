@@ -2,6 +2,8 @@ package nl.ordina.rogier.kookschriften.client.controller;
 
 import java.util.List;
 
+import org.apache.coyote.RequestGroupInfo;
+
 import nl.ordina.rogier.kookschriften.client.ExpensesRequestFactory;
 import nl.ordina.rogier.kookschriften.client.ReceptRequest;
 import nl.ordina.rogier.kookschriften.client.UploadedImageRequest;
@@ -25,20 +27,20 @@ import com.google.web.bindery.event.shared.SimpleEventBus;
 import com.google.web.bindery.requestfactory.shared.Receiver;
 import com.google.web.bindery.requestfactory.shared.Request;
 
-public class EigenReceptenController {
+public class EigenReceptenController implements ControllerInterface {
     EigenReceptenView eigenRecepten;
     HistoryManager historyManager;
     private final ExpensesRequestFactory requestFactory = GWT.create(ExpensesRequestFactory.class);
 
-    public EigenReceptenController(EigenReceptenView eigenRecepten, HistoryManager historyManager) {
-	this.eigenRecepten = eigenRecepten;
+    EigenReceptenController(EigenReceptenView eigenRecepten, HistoryManager historyManager) {
+ 	this.eigenRecepten = eigenRecepten;
 	this.historyManager = historyManager;
-	init();
-	bind();
-	getEigenRecepten();
     }
 
-    private void init() {
+    public void init() {
+	bind();
+	getEigenRecepten();
+
     }
 
     private void bind() {
@@ -129,6 +131,15 @@ public class EigenReceptenController {
 		    public void onSelectionChange(SelectionChangeEvent event) {
 			ReceptProxy selected = selectionModel.getSelectedObject();
 			if (selected != null) {
+			    ReceptRequest receptRequest = requestFactory.receptRequest();
+			    Request<ReceptProxy> requestReceptProxy = receptRequest.findRecept(selected.getId()).with("ingredienten");
+			    requestReceptProxy.fire(new Receiver<ReceptProxy>() {
+
+				@Override
+				public void onSuccess(ReceptProxy response) {
+				    System.out.println(response.getIngredienten().toString());
+				    
+				}});
 			    Window.alert("You selected: " + selected.getNaamRecept());
 			}
 		    }

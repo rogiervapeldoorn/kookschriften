@@ -1,7 +1,7 @@
 package nl.ordina.rogier.kookschriften.client.view;
 
-import nl.ordina.rogier.kookschriften.client.controller.ReceptenZoekenController;
-import nl.ordina.rogier.kookschriften.client.model.ReceptenZoekenManager;
+import nl.ordina.rogier.kookschriften.client.controller.ControllerFactory;
+import nl.ordina.rogier.kookschriften.client.controller.ControllerInterface;
 
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.uibinder.client.UiBinder;
@@ -37,10 +37,9 @@ public class ReceptenZoekenView extends Composite implements HasText {
 
     public ReceptenZoekenView() {
 	initWidget(uiBinder.createAndBindUi(this));
-	ReceptenZoekenController controller=new ReceptenZoekenController(this);
-	ReceptenZoekenManager receptenZoekenManager=new ReceptenZoekenManager(controller);
-	receptenZoekenManager.init();
-	zoeken.addClickHandler(receptenZoekenManager);
+	ControllerInterface controller=ControllerFactory.getController(this);
+	controller.init();
+	
     }
 
     public void setText(String text) {

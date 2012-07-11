@@ -14,6 +14,7 @@ import com.googlecode.objectify.Key;
 public interface ReceptRequest extends RequestContext{
     Request<List<ReceptProxy>> findAllRecepten();
     Request<List<ReceptProxy>> findMyRecepten();
+    Request<ReceptProxy> findRecept(Long id);
     Request<Void> save(ReceptProxy receptProxy);
 }
 

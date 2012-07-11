@@ -7,15 +7,11 @@ import nl.ordina.rogier.kookschriften.client.TijdEenheid;
 import nl.ordina.rogier.kookschriften.domain.Recept;
 import nl.ordina.rogier.kookschriften.server.locator.ReceptLocator;
 
-import com.google.web.bindery.requestfactory.shared.EntityProxy;
 import com.google.web.bindery.requestfactory.shared.ProxyFor;
 
 @ProxyFor(value=Recept.class, locator=ReceptLocator.class)
-public interface ReceptProxy extends EntityProxy  {
-    public Long getId();
-    public void setId(Long id);
-    public Integer getVersion();
-    public void setVersion(Integer version);
+public interface ReceptProxy extends DatastoreObjectProxy {
+
     public String getEmail();
     public void setEmail(String email);
     public String getNaamRecept();

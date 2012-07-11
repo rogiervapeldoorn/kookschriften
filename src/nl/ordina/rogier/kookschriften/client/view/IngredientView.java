@@ -5,10 +5,10 @@ import java.util.List;
 
 import nl.ordina.rogier.kookschriften.client.GewichtEenheid;
 import nl.ordina.rogier.kookschriften.client.ReceptRequest;
-import nl.ordina.rogier.kookschriften.client.controller.IngredientController;
+import nl.ordina.rogier.kookschriften.client.controller.ControllerFactory;
+import nl.ordina.rogier.kookschriften.client.controller.ControllerInterface;
 import nl.ordina.rogier.kookschriften.client.events.NewIngredientEvent;
 import nl.ordina.rogier.kookschriften.client.events.NewIngredientEventHandler;
-import nl.ordina.rogier.kookschriften.client.model.IngredientManager;
 import nl.ordina.rogier.kookschriften.shared.proxy.IngredientRegelProxy;
 
 import com.google.gwt.core.client.GWT;
@@ -53,9 +53,8 @@ public class IngredientView extends Composite implements HasText, HasHandlers {
 	this.listofIngredients=listofIngredients;
 	Ingredient=new SuggestBox(ingredients);
 	initWidget(uiBinder.createAndBindUi(this));
-	IngredientController ingredientController = new IngredientController(this);
-	IngredientManager ingredientManager = new IngredientManager(ingredientController);
-	
+	ControllerInterface controllerInterface = ControllerFactory.getController(this);
+	controllerInterface.init();
 	handlerManager = new HandlerManager(this);
 	Gewicht.addValueChangeHandler(new ValueChangeHandler<String>() {
 

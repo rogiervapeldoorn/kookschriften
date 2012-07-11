@@ -5,9 +5,8 @@ import nl.ordina.rogier.kookschriften.domain.IngredientRegel;
 import nl.ordina.rogier.kookschriften.server.locator.IngredientRegelLocator;
 
 import com.google.web.bindery.requestfactory.shared.ProxyFor;
-import com.google.web.bindery.requestfactory.shared.ValueProxy;
 @ProxyFor(value=IngredientRegel.class, locator=IngredientRegelLocator.class)
-public interface IngredientRegelProxy extends ValueProxy  {
+public interface IngredientRegelProxy extends DatastoreValueObjectProxy  {
     public String getIngredient();
     public void setIngredient(String ingredient);
     public Double getGewicht();

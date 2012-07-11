@@ -2,10 +2,10 @@ package nl.ordina.rogier.kookschriften.client.controller;
 
 import nl.ordina.rogier.kookschriften.client.view.ReceptenZoekenView;
 
-public class ReceptenZoekenController {
+public class ReceptenZoekenController implements ControllerInterface {
     
     ReceptenZoekenView receptenZoeken;
-    public ReceptenZoekenController(ReceptenZoekenView receptenZoeken) {
+    ReceptenZoekenController(ReceptenZoekenView receptenZoeken) {
 	this.receptenZoeken= receptenZoeken;
 	UtilController.initSoortRecept(receptenZoeken.soortRecept);
 	

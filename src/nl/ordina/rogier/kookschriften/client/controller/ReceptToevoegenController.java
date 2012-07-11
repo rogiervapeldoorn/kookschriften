@@ -31,7 +31,7 @@ import com.google.web.bindery.event.shared.SimpleEventBus;
 import com.google.web.bindery.requestfactory.shared.Receiver;
 import com.google.web.bindery.requestfactory.shared.Request;
 
-public class ReceptToevoegenController {
+public class ReceptToevoegenController implements ControllerInterface{
 
     ReceptToevoegenView receptToevoegen;
     private final ExpensesRequestFactory requestFactory = GWT.create(ExpensesRequestFactory.class);
@@ -42,17 +42,14 @@ public class ReceptToevoegenController {
     public final MultiWordSuggestOracle ingredients = new MultiWordSuggestOracle();
     public List<String> listofIngredients=new ArrayList<String>();
 
-    public ReceptToevoegenController(HistoryManager historyManager, ReceptToevoegenView receptToevoegen) {
+    ReceptToevoegenController(HistoryManager historyManager, ReceptToevoegenView receptToevoegen) {
 	final EventBus eventBus = new SimpleEventBus();
 	requestFactory.initialize(eventBus);
 	this.historyManager = historyManager;
 	this.receptToevoegen = receptToevoegen;
-	init();
-	startNewBlobstoreSession();
-	bind();
     }
 
-    private void init() {
+    public void init() {
 	UtilController.initSoortRecept(receptToevoegen.soortRecept);
 	UtilController.initTijdEenheid(receptToevoegen.tijdEenheid);
 	IngredientRequest ingredientRequest=requestFactory.ingredientRequest();
@@ -84,6 +81,8 @@ public class ReceptToevoegenController {
 	};
 	ingredient.addNewIngredientEventHandler(newIngredientEventHandler);
 	receptToevoegen.ingredienten.add(ingredient);
+	startNewBlobstoreSession();
+	bind();
     }
 
     private void bind() {
@@ -154,7 +153,10 @@ public class ReceptToevoegenController {
 	for (int i = 0; i < receptToevoegen.ingredienten.getWidgetCount(); i++) {
 	    IngredientView ingredientView = (IngredientView) receptToevoegen.ingredienten.getWidget(i);
 	    IngredientRegelProxy ingredientRegelProxy = ingredientView.getIngredientRegelProxy(receptRequest);
-	    list.add(ingredientRegelProxy);
+	    if (ingredientRegelProxy!=null)
+	    {
+		list.add(ingredientRegelProxy);
+	    }
 	}
 	receptProxy.setIngredienten(list);
 	Request<Void> saveRequest = receptRequest.save(receptProxy);
