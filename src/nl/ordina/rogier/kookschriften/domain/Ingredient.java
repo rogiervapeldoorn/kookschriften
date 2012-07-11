@@ -1,40 +1,11 @@
 package nl.ordina.rogier.kookschriften.domain;
 
 import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.PrePersist;
 
 @Entity
-public class Ingredient {
-    @Id
-    private Long id;
-    private Integer version = 0;
+public class Ingredient extends DatastoreObject{
     private String ingredient;
     
-    /**
-     * Auto-increment version # whenever persisted
-     */
-    @PrePersist
-    void onPersist() {
-	this.version++;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public Integer getVersion() {
-        return version;
-    }
-
-    public void setVersion(Integer version) {
-        this.version = version;
-    }
-
     public String getIngredient() {
         return ingredient;
     }

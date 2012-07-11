@@ -68,7 +68,7 @@ public class ReceptToevoegenView extends Composite implements HasText {
 	uploadButton.setEnabled(false);
 	uploadField.setName("image");
 
-	ControllerInterface receptToevoegenController = ControllerFactory.getController(historyManager, this);
+	ControllerInterface receptToevoegenController = ControllerFactory.newController(historyManager, this);
 	receptToevoegenController.init();
     }
 

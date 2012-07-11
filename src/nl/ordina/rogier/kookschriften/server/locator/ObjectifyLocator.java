@@ -1,5 +1,6 @@
 package nl.ordina.rogier.kookschriften.server.locator;
 
+import nl.ordina.rogier.kookschriften.domain.DatastoreObject;
 import nl.ordina.rogier.kookschriften.domain.Recept;
 import nl.ordina.rogier.kookschriften.server.service.ObjectifyDao;
 
@@ -8,9 +9,9 @@ import com.google.web.bindery.requestfactory.shared.Locator;
 /**
  * Generic @Locator for objects that extend DatastoreObject
  */
-public class ObjectifyLocator extends Locator<Recept, Long> {
+public class ObjectifyLocator extends Locator<DatastoreObject, Long> {
   @Override
-  public Recept create(Class<? extends Recept> clazz) {
+  public DatastoreObject create(Class<? extends DatastoreObject> clazz) {
     try {
       return clazz.newInstance();
     } catch (InstantiationException e) {
@@ -21,19 +22,19 @@ public class ObjectifyLocator extends Locator<Recept, Long> {
   }
 
   @Override
-  public Recept find(Class<? extends Recept> clazz, Long id) {
-    ObjectifyDao daoBase = new ObjectifyDao();
-    return daoBase.ofy().find(clazz, id);
+  public DatastoreObject find(Class<? extends DatastoreObject> clazz, Long id) {
+    //ObjectifyDao daoBase = new ObjectifyDao();
+    return null;
   }
 
   @Override
-  public Class<Recept> getDomainType() {
+  public Class<DatastoreObject> getDomainType() {
     // Never called
     return null;
   }
 
   @Override
-  public Long getId(Recept domainObject) {
+  public Long getId(DatastoreObject domainObject) {
     return domainObject.getId();
   }
 
@@ -43,7 +44,7 @@ public class ObjectifyLocator extends Locator<Recept, Long> {
   }
 
   @Override
-  public Object getVersion(Recept domainObject) {
+  public Object getVersion(DatastoreObject domainObject) {
     return domainObject.getVersion();
   }
 }

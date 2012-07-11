@@ -31,7 +31,7 @@ public class EigenReceptenView extends Composite implements HasText {
 
     public EigenReceptenView(HistoryManager historyManager) {
 	initWidget(uiBinder.createAndBindUi(this));
-	ControllerInterface controllerInterface = ControllerFactory.getController(this, historyManager);
+	ControllerInterface controllerInterface = ControllerFactory.newController(this, historyManager);
 	controllerInterface.init();
     }
 

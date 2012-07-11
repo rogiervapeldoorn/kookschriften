@@ -37,7 +37,7 @@ public class ReceptenZoekenView extends Composite implements HasText {
 
     public ReceptenZoekenView() {
 	initWidget(uiBinder.createAndBindUi(this));
-	ControllerInterface controller=ControllerFactory.getController(this);
+	ControllerInterface controller=ControllerFactory.newController(this);
 	controller.init();
 	
     }

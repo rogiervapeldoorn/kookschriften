@@ -5,11 +5,12 @@ import java.util.List;
 import nl.ordina.rogier.kookschriften.client.SoortRecept;
 import nl.ordina.rogier.kookschriften.client.TijdEenheid;
 import nl.ordina.rogier.kookschriften.domain.Recept;
+import nl.ordina.rogier.kookschriften.server.locator.ObjectifyLocator;
 import nl.ordina.rogier.kookschriften.server.locator.ReceptLocator;
 
 import com.google.web.bindery.requestfactory.shared.ProxyFor;
 
-@ProxyFor(value=Recept.class, locator=ReceptLocator.class)
+@ProxyFor(value=Recept.class, locator=ObjectifyLocator.class)
 public interface ReceptProxy extends DatastoreObjectProxy {
 
     public String getEmail();

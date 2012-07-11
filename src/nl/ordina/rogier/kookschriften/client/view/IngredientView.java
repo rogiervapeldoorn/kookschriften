@@ -53,7 +53,7 @@ public class IngredientView extends Composite implements HasText, HasHandlers {
 	this.listofIngredients=listofIngredients;
 	Ingredient=new SuggestBox(ingredients);
 	initWidget(uiBinder.createAndBindUi(this));
-	ControllerInterface controllerInterface = ControllerFactory.getController(this);
+	ControllerInterface controllerInterface = ControllerFactory.newController(this);
 	controllerInterface.init();
 	handlerManager = new HandlerManager(this);
 	Gewicht.addValueChangeHandler(new ValueChangeHandler<String>() {
