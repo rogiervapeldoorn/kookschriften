@@ -9,5 +9,5 @@ public interface ExpensesRequestFactory extends RequestFactory {
     UploadedImageRequest uploadedImageRequest();
     IngredientRegelRequest ingredientRegelRequest();
     IngredientRequest ingredientRequest();
-
+    LoginRequest loginRequest();
   }

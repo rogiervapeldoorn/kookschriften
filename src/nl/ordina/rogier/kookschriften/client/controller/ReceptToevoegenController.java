@@ -5,6 +5,7 @@ import java.util.List;
 
 import nl.ordina.rogier.kookschriften.client.ExpensesRequestFactory;
 import nl.ordina.rogier.kookschriften.client.IngredientRequest;
+import nl.ordina.rogier.kookschriften.client.LoginRequest;
 import nl.ordina.rogier.kookschriften.client.ReceptRequest;
 import nl.ordina.rogier.kookschriften.client.SoortRecept;
 import nl.ordina.rogier.kookschriften.client.TijdEenheid;
@@ -15,15 +16,21 @@ import nl.ordina.rogier.kookschriften.client.model.HistoryManager;
 import nl.ordina.rogier.kookschriften.client.view.HistoryToken;
 import nl.ordina.rogier.kookschriften.client.view.IngredientView;
 import nl.ordina.rogier.kookschriften.client.view.ReceptToevoegenView;
+import nl.ordina.rogier.kookschriften.domain.LoginInfo;
 import nl.ordina.rogier.kookschriften.shared.proxy.IngredientProxy;
 import nl.ordina.rogier.kookschriften.shared.proxy.IngredientRegelProxy;
+import nl.ordina.rogier.kookschriften.shared.proxy.LoginInfoProxy;
 import nl.ordina.rogier.kookschriften.shared.proxy.ReceptProxy;
 
 import com.google.gwt.core.client.GWT;
+import com.google.gwt.dom.client.Element;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.user.client.ui.Button;
+import com.google.gwt.user.client.ui.DialogBox;
 import com.google.gwt.user.client.ui.FormPanel;
+import com.google.gwt.user.client.ui.HTML;
+import com.google.gwt.user.client.ui.VerticalPanel;
 import com.google.gwt.user.client.ui.FormPanel.SubmitCompleteEvent;
 import com.google.gwt.user.client.ui.Image;
 import com.google.gwt.user.client.ui.MultiWordSuggestOracle;
@@ -53,6 +60,24 @@ public class ReceptToevoegenController implements ControllerInterface {
     }
 
     public void init() {
+	LoginRequest loginRequest=requestFactory.loginRequest();
+	Request<LoginInfoProxy> loginRequestProxy=loginRequest.login(GWT.getHostPageBaseURL());
+	loginRequestProxy.fire(new Receiver<LoginInfoProxy>() {
+
+	    @Override
+	    public void onSuccess(LoginInfoProxy response) {
+		if (!response.isLoggedIn())
+		{
+		    historyManager.changeValue(HistoryToken.Login, response);
+		    HistoryToken.Login.fire();    
+		}
+	    }
+	});
+	
+    }
+
+    private void loggedInView() {
+	
 	UtilController.initSoortRecept(receptToevoegen.soortRecept);
 	UtilController.initTijdEenheid(receptToevoegen.tijdEenheid);
 	addValues();

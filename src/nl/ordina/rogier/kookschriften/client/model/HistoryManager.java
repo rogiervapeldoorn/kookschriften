@@ -4,6 +4,8 @@ import nl.ordina.rogier.kookschriften.client.controller.HistoryController;
 import nl.ordina.rogier.kookschriften.client.view.EigenReceptenView;
 import nl.ordina.rogier.kookschriften.client.view.HistoryToken;
 import nl.ordina.rogier.kookschriften.client.view.HomeView;
+import nl.ordina.rogier.kookschriften.client.view.LoginView;
+import nl.ordina.rogier.kookschriften.client.view.LogoutView;
 import nl.ordina.rogier.kookschriften.client.view.ReceptToevoegenView;
 import nl.ordina.rogier.kookschriften.client.view.ReceptenZoekenView;
 import nl.ordina.rogier.kookschriften.shared.proxy.DatastoreObjectProxy;
@@ -41,6 +43,10 @@ public class HistoryManager implements ValueChangeHandler<String> {
 	}
 	case ReceptToevoegen: {
 	    controller.changeWidget(new ReceptToevoegenView(this,datastoreObjectProxy));
+	    break;
+	}
+	case Login: {
+	    controller.changeWidget(new LoginView(this,datastoreObjectProxy));
 	    break;
 	}
 	default:
