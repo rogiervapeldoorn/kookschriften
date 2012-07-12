@@ -5,6 +5,8 @@ import java.util.logging.Logger;
 import nl.ordina.rogier.kookschriften.client.controller.ControllerFactory;
 import nl.ordina.rogier.kookschriften.client.controller.ControllerInterface;
 import nl.ordina.rogier.kookschriften.client.model.HistoryManager;
+import nl.ordina.rogier.kookschriften.shared.proxy.DatastoreObjectProxy;
+import nl.ordina.rogier.kookschriften.shared.proxy.ReceptProxy;
 
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.ChangeEvent;
@@ -17,6 +19,7 @@ import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.FileUpload;
 import com.google.gwt.user.client.ui.FormPanel;
+import com.google.gwt.user.client.ui.HTMLPanel;
 import com.google.gwt.user.client.ui.HasText;
 import com.google.gwt.user.client.ui.HorizontalPanel;
 import com.google.gwt.user.client.ui.ListBox;
@@ -52,8 +55,11 @@ public class ReceptToevoegenView extends Composite implements HasText {
     @UiField public ListBox tijdEenheid;
     @UiField public TextArea bereiding;
     @UiField public TextBox afkomstigVan;
-
-    public ReceptToevoegenView(HistoryManager historyManager) {
+    @UiField public HTMLPanel mainPanel;
+    
+    public ReceptProxy receptProxy;
+    public ReceptToevoegenView(HistoryManager historyManager,DatastoreObjectProxy datastoreObjectProxy) {
+	receptProxy=(ReceptProxy) datastoreObjectProxy;
 	initWidget(uiBinder.createAndBindUi(this));
 
 	naamRecept.addChangeHandler(new ChangeHandler() {
@@ -72,7 +78,6 @@ public class ReceptToevoegenView extends Composite implements HasText {
 	receptToevoegenController.init();
     }
 
-    
     public void setText(String text) {
     }
 

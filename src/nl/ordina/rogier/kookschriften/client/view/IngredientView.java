@@ -44,11 +44,13 @@ public class IngredientView extends Composite implements HasText, HasHandlers {
     public ListBox Eenheid;
     @UiField
     public TextBox Gewicht;
+    public IngredientRegelProxy ingredientRegelProxy;
     
     interface IngredientUiBinder extends UiBinder<Widget, IngredientView> {
     }
 
-    public IngredientView(MultiWordSuggestOracle ingredients,List<String> listofIngredients) {
+    public IngredientView(MultiWordSuggestOracle ingredients,List<String> listofIngredients,IngredientRegelProxy ingredientRegelProxy) {
+	this.ingredientRegelProxy=ingredientRegelProxy;
 	this.ingredients=ingredients;
 	this.listofIngredients=listofIngredients;
 	Ingredient=new SuggestBox(ingredients);

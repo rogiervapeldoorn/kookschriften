@@ -50,7 +50,7 @@ public class EigenReceptenController implements ControllerInterface {
 
 	    @Override
 	    public void onClick(ClickEvent event) {
-		historyManager.changeValue(HistoryToken.ReceptToevoegen);
+		historyManager.changeValue(HistoryToken.ReceptToevoegen,null);
 		HistoryToken.ReceptToevoegen.fire();
 	    }
 	});
@@ -137,10 +137,9 @@ public class EigenReceptenController implements ControllerInterface {
 
 				@Override
 				public void onSuccess(ReceptProxy response) {
-				    System.out.println(response.getIngredienten().toString());
-				    
+				    HistoryToken.ReceptToevoegen.fire();				    
+				    historyManager.changeValue(HistoryToken.ReceptToevoegen,response);
 				}});
-			    Window.alert("You selected: " + selected.getNaamRecept());
 			}
 		    }
 		});

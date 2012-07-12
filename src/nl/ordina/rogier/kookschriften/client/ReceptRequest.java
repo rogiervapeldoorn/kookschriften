@@ -16,5 +16,6 @@ public interface ReceptRequest extends RequestContext{
     Request<List<ReceptProxy>> findMyRecepten();
     Request<ReceptProxy> findRecept(Long id);
     Request<Void> save(ReceptProxy receptProxy);
+    Request<Void> delete(Long id);
 }
 

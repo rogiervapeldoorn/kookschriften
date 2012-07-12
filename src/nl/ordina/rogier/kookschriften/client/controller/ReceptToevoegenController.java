@@ -6,6 +6,7 @@ import java.util.List;
 import nl.ordina.rogier.kookschriften.client.ExpensesRequestFactory;
 import nl.ordina.rogier.kookschriften.client.IngredientRequest;
 import nl.ordina.rogier.kookschriften.client.ReceptRequest;
+import nl.ordina.rogier.kookschriften.client.SoortRecept;
 import nl.ordina.rogier.kookschriften.client.TijdEenheid;
 import nl.ordina.rogier.kookschriften.client.UploadUrlRequest;
 import nl.ordina.rogier.kookschriften.client.events.NewIngredientEvent;
@@ -21,6 +22,7 @@ import nl.ordina.rogier.kookschriften.shared.proxy.ReceptProxy;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
+import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.FormPanel;
 import com.google.gwt.user.client.ui.FormPanel.SubmitCompleteEvent;
 import com.google.gwt.user.client.ui.Image;
@@ -30,8 +32,9 @@ import com.google.web.bindery.event.shared.EventBus;
 import com.google.web.bindery.event.shared.SimpleEventBus;
 import com.google.web.bindery.requestfactory.shared.Receiver;
 import com.google.web.bindery.requestfactory.shared.Request;
+import com.google.web.bindery.requestfactory.shared.ServerFailure;
 
-public class ReceptToevoegenController implements ControllerInterface{
+public class ReceptToevoegenController implements ControllerInterface {
 
     ReceptToevoegenView receptToevoegen;
     private final ExpensesRequestFactory requestFactory = GWT.create(ExpensesRequestFactory.class);
@@ -40,7 +43,7 @@ public class ReceptToevoegenController implements ControllerInterface{
     List<String> uploadedImages = new ArrayList<String>();
 
     public final MultiWordSuggestOracle ingredients = new MultiWordSuggestOracle();
-    public List<String> listofIngredients=new ArrayList<String>();
+    public List<String> listofIngredients = new ArrayList<String>();
 
     ReceptToevoegenController(HistoryManager historyManager, ReceptToevoegenView receptToevoegen) {
 	final EventBus eventBus = new SimpleEventBus();
@@ -52,28 +55,29 @@ public class ReceptToevoegenController implements ControllerInterface{
     public void init() {
 	UtilController.initSoortRecept(receptToevoegen.soortRecept);
 	UtilController.initTijdEenheid(receptToevoegen.tijdEenheid);
-	IngredientRequest ingredientRequest=requestFactory.ingredientRequest();
-	Request<List<IngredientProxy>> request=ingredientRequest.findAll();
+	addValues();
+	IngredientRequest ingredientRequest = requestFactory.ingredientRequest();
+	Request<List<IngredientProxy>> request = ingredientRequest.findAll();
 	request.fire(new Receiver<List<IngredientProxy>>() {
 
 	    @Override
 	    public void onSuccess(List<IngredientProxy> response) {
-		
+
 		for (IngredientProxy ingredientProxy : response) {
 		    ingredients.add(ingredientProxy.getIngredient());
 		    listofIngredients.add(ingredientProxy.getIngredient());
 		}
-		
+
 	    }
 	});
 
-	IngredientView ingredient = new IngredientView(ingredients,listofIngredients);
+	IngredientView ingredient = new IngredientView(ingredients, listofIngredients, null);
 	NewIngredientEventHandler newIngredientEventHandler = new NewIngredientEventHandler() {
 
 	    @Override
 	    public void onNewIngredient(NewIngredientEvent event) {
 		if (receptToevoegen.ingredienten.getWidgetCount() < 40) {
-		    IngredientView ingredient = new IngredientView(ingredients,listofIngredients);
+		    IngredientView ingredient = new IngredientView(ingredients, listofIngredients, null);
 		    receptToevoegen.ingredienten.add(ingredient);
 		    ingredient.addNewIngredientEventHandler(this);
 		}
@@ -83,6 +87,67 @@ public class ReceptToevoegenController implements ControllerInterface{
 	receptToevoegen.ingredienten.add(ingredient);
 	startNewBlobstoreSession();
 	bind();
+    }
+
+    private void addValues() {
+	if (receptToevoegen.receptProxy != null) {
+	    receptToevoegen.afkomstigVan.setValue(receptToevoegen.receptProxy.getAfkomstigVan());
+	    receptToevoegen.bereiding.setValue(receptToevoegen.receptProxy.getBereiding());
+	    receptToevoegen.bereidingsTijd.setValue(receptToevoegen.receptProxy.getBereidingsTijd());
+	    receptToevoegen.naamRecept.setValue(receptToevoegen.receptProxy.getNaamRecept());
+	    for (IngredientRegelProxy ingredientRegelProxy : receptToevoegen.receptProxy.getIngredienten()) {
+		IngredientView ingredientView = new IngredientView(ingredients, listofIngredients, ingredientRegelProxy);
+		receptToevoegen.ingredienten.add(ingredientView);
+	    }
+	    if (receptToevoegen.receptProxy.getSoortRecept() != null) {
+		UtilController.selectItem(receptToevoegen.soortRecept, receptToevoegen.receptProxy.getSoortRecept().toString());
+	    }
+	    if (receptToevoegen.receptProxy.getBereidingsTijdEenheid() != null) {
+		UtilController.selectItem(receptToevoegen.tijdEenheid, receptToevoegen.receptProxy.getBereidingsTijdEenheid().toString());
+	    }
+	    if (receptToevoegen.receptProxy.getUploadedImages() != null) {
+		for (String imageUrl : receptToevoegen.receptProxy.getUploadedImages()) {
+		    addImage(imageUrl);
+		}
+	    }
+	    Button deleteButton = new Button();
+	    deleteButton.setText("Verwijder");
+	    receptToevoegen.mainPanel.add(deleteButton);
+	    deleteButton.addClickHandler(new ClickHandler() {
+
+		@Override
+		public void onClick(ClickEvent event) {
+		    final EventBus eventBus = new SimpleEventBus();
+		    requestFactory.initialize(eventBus);
+		    ReceptRequest receptRequest = requestFactory.receptRequest();
+		    Request<Void> deleteRequest = receptRequest.delete(receptToevoegen.receptProxy.getId());
+		    deleteRequest.fire(new Receiver<Void>() {
+
+			@Override
+			public void onSuccess(Void response) {
+			    historyManager.changeValue(HistoryToken.EigenRecepten, null);
+			    HistoryToken.EigenRecepten.fire();    
+			}
+		    });
+		}
+	    });
+	}
+
+    }
+
+    private void addImage(String imageUrl) {
+	uploadedImages.add(imageUrl);
+	Image image = new Image();
+	image.setUrl(imageUrl + "=s200");
+	final PopupPanel imagePopup = new PopupPanel(true);
+	imagePopup.setAnimationEnabled(true);
+	imagePopup.setWidget(image);
+	imagePopup.setGlassEnabled(true);
+	imagePopup.setAutoHideEnabled(true);
+	imagePopup.center();
+	imagePopup.setHeight("100px");
+	receptToevoegen.tumbnails.add(imagePopup);
+
     }
 
     private void bind() {
@@ -100,21 +165,10 @@ public class ReceptToevoegenController implements ControllerInterface{
 		receptToevoegen.uploadForm.reset();
 		startNewBlobstoreSession();
 		String imageUrl = event.getResults();
-		uploadedImages.add(imageUrl);
-		Image image = new Image();
-		image.setUrl(imageUrl+"=s200");
-		final PopupPanel imagePopup = new PopupPanel(true);
-		imagePopup.setAnimationEnabled(true);
-		imagePopup.setWidget(image);
-		imagePopup.setGlassEnabled(true);
-		imagePopup.setAutoHideEnabled(true);
-		imagePopup.center();
-		imagePopup.setHeight("100px");
-		receptToevoegen.tumbnails.add(imagePopup);
+		addImage(imageUrl);
 		receptToevoegen.uploadField.setEnabled(true);
 		receptToevoegen.uploadButton.setEnabled(true);
 		receptToevoegen.uploadButton.setText("Upload");
-		
 
 	    }
 	});
@@ -143,18 +197,23 @@ public class ReceptToevoegenController implements ControllerInterface{
 	requestFactory.initialize(eventBus);
 	ReceptRequest receptRequest = requestFactory.receptRequest();
 	ReceptProxy receptProxy = receptRequest.create(ReceptProxy.class);
+	if (receptToevoegen.receptProxy != null) {
+	    receptProxy.setId(receptToevoegen.receptProxy.getId());
+	    receptProxy.setVersion(receptToevoegen.receptProxy.getVersion());
+	}
 	receptProxy.setNaamRecept(receptToevoegen.naamRecept.getValue());
 	receptProxy.setAfkomstigVan(receptToevoegen.afkomstigVan.getValue());
 	receptProxy.setBereiding(receptToevoegen.bereiding.getValue());
 	receptProxy.setBereidingsTijd(receptToevoegen.bereidingsTijd.getValue());
 	receptProxy.setBereidingsTijdEenheid(TijdEenheid.valueOf(receptToevoegen.tijdEenheid.getValue(receptToevoegen.tijdEenheid.getSelectedIndex())));
+	receptProxy.setSoortRecept(SoortRecept.valueOf(receptToevoegen.soortRecept.getValue(receptToevoegen.soortRecept.getSelectedIndex())));
+
 	receptProxy.setUploadedImages(uploadedImages);
 	List<IngredientRegelProxy> list = new ArrayList<IngredientRegelProxy>();
 	for (int i = 0; i < receptToevoegen.ingredienten.getWidgetCount(); i++) {
 	    IngredientView ingredientView = (IngredientView) receptToevoegen.ingredienten.getWidget(i);
 	    IngredientRegelProxy ingredientRegelProxy = ingredientView.getIngredientRegelProxy(receptRequest);
-	    if (ingredientRegelProxy!=null)
-	    {
+	    if (ingredientRegelProxy != null) {
 		list.add(ingredientRegelProxy);
 	    }
 	}
@@ -165,10 +224,15 @@ public class ReceptToevoegenController implements ControllerInterface{
 	    @Override
 	    public void onSuccess(Void response) {
 
-
-		historyManager.changeValue(HistoryToken.EigenRecepten);
+		historyManager.changeValue(HistoryToken.EigenRecepten, null);
 		HistoryToken.EigenRecepten.fire();
-		
+
+	    }
+
+	    @Override
+	    public void onFailure(ServerFailure error) {
+		historyManager.changeValue(HistoryToken.EigenRecepten, null);
+		HistoryToken.EigenRecepten.fire();
 	    }
 
 	});
@@ -176,19 +240,18 @@ public class ReceptToevoegenController implements ControllerInterface{
 	List<IngredientProxy> lists = new ArrayList<IngredientProxy>();
 	for (int i = 0; i < receptToevoegen.ingredienten.getWidgetCount(); i++) {
 	    IngredientView ingredientView = (IngredientView) receptToevoegen.ingredienten.getWidget(i);
-	    IngredientProxy ingredientProxy= ingredientRequest.create(IngredientProxy.class);
+	    IngredientProxy ingredientProxy = ingredientRequest.create(IngredientProxy.class);
 	    ingredientProxy.setIngredient(ingredientView.Ingredient.getValue());
-	    if (!ingredientView.listofIngredients.contains(ingredientView.Ingredient.getValue()))
-	    {
+	    if (!ingredientView.listofIngredients.contains(ingredientView.Ingredient.getValue())) {
 		lists.add(ingredientProxy);
 	    }
 	}
-	Request<Void> saveRequestI =ingredientRequest.saveAll(lists);
+	Request<Void> saveRequestI = ingredientRequest.saveAll(lists);
 	saveRequestI.fire(new Receiver<Void>() {
 
 	    @Override
 	    public void onSuccess(Void response) {
-		
+
 	    }
 	});
 

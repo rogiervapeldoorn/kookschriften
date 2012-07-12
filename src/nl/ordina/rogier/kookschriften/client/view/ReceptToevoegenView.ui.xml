@@ -6,7 +6,7 @@
 			font-weight: bold;
 		}
 	</ui:style>
-	<g:HTMLPanel>
+	<g:HTMLPanel ui:field="mainPanel">
 		<g:Grid width="448px" height="155px">
 			<g:row>
 				<g:customCell>

@@ -20,4 +20,14 @@ public class UtilController {
 	}
     }
 
+    public static void selectItem(ListBox listBox, String string) {
+	for (int i = 0; i<listBox.getItemCount();i++)
+	    {
+		if (listBox.getItemText(i).equals(string))
+		{
+		    listBox.setSelectedIndex(i);
+		    break;
+		}
+	    }
+    }
 }

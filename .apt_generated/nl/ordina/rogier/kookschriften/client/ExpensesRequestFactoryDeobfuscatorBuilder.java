@@ -69,6 +69,13 @@ withOperation(new OperationKey("ivlF_Ngdaa7EH4NnwGmOTgMnB2k="),
   .withMethodName("findRecept")
   .withRequestContext("nl.ordina.rogier.kookschriften.client.ReceptRequest")
   .build());
+withOperation(new OperationKey("SmbB5ED$vgwcpeVg$sTfVMUPHHU="),
+  new OperationData.Builder()
+  .withClientMethodDescriptor("(Ljava/lang/Long;)Lcom/google/web/bindery/requestfactory/shared/Request;")
+  .withDomainMethodDescriptor("(Ljava/lang/Long;)Ljava/lang/Void;")
+  .withMethodName("delete")
+  .withRequestContext("nl.ordina.rogier.kookschriften.client.ReceptRequest")
+  .build());
 withOperation(new OperationKey("BWvoAzF5L6B7rvY1jcCpWCx8O34="),
   new OperationData.Builder()
   .withClientMethodDescriptor("()Lcom/google/web/bindery/requestfactory/shared/Request;")
@@ -79,17 +86,15 @@ withOperation(new OperationKey("BWvoAzF5L6B7rvY1jcCpWCx8O34="),
 withRawTypeToken("w1Qg$YHpDaNcHrR5HZ$23y518nA=", "com.google.web.bindery.requestfactory.shared.EntityProxy");
 withRawTypeToken("8KVVbwaaAtl6KgQNlOTsLCp9TIU=", "com.google.web.bindery.requestfactory.shared.ValueProxy");
 withRawTypeToken("FXHD5YU0TiUl3uBaepdkYaowx9k=", "com.google.web.bindery.requestfactory.shared.BaseProxy");
-withRawTypeToken("tGCKLDvflO9UCBmcbEzQ0W_Xc_0=", "nl.ordina.rogier.kookschriften.shared.proxy.DatastoreObjectProxy");
-withRawTypeToken("dYOIFHSy05I2JRPzmXeUfAXWgtA=", "nl.ordina.rogier.kookschriften.shared.proxy.DatastoreValueObjectProxy");
 withRawTypeToken("TWfF1KY7qBPhSmDEdNK9kmaDobo=", "nl.ordina.rogier.kookschriften.shared.proxy.IngredientProxy");
-withRawTypeToken("DdSbUFFRpX6qsw7$6VGlO21_gwo=", "nl.ordina.rogier.kookschriften.shared.proxy.IngredientRegelProxy");
 withRawTypeToken("x$vWGabv_V$mR4E7Z9Wj0lEqYbY=", "nl.ordina.rogier.kookschriften.shared.proxy.ReceptProxy");
+withRawTypeToken("tGCKLDvflO9UCBmcbEzQ0W_Xc_0=", "nl.ordina.rogier.kookschriften.shared.proxy.DatastoreObjectProxy");
+withRawTypeToken("DdSbUFFRpX6qsw7$6VGlO21_gwo=", "nl.ordina.rogier.kookschriften.shared.proxy.IngredientRegelProxy");
+withRawTypeToken("dYOIFHSy05I2JRPzmXeUfAXWgtA=", "nl.ordina.rogier.kookschriften.shared.proxy.DatastoreValueObjectProxy");
 withRawTypeToken("eCIByiRk93NmOYT$SBZk$b1aZaA=", "nl.ordina.rogier.kookschriften.shared.proxy.TagProxy");
 withRawTypeToken("hYaPLql4_oEU04Jtcp24QYjTuKA=", "nl.ordina.rogier.kookschriften.shared.proxy.UploadedImageProxy");
-withClientToDomainMappings("nl.ordina.rogier.kookschriften.domain.DatastoreObject", Arrays.asList("nl.ordina.rogier.kookschriften.shared.proxy.DatastoreObjectProxy"));
-withClientToDomainMappings("nl.ordina.rogier.kookschriften.domain.IngredientRegel", Arrays.asList("nl.ordina.rogier.kookschriften.shared.proxy.IngredientRegelProxy"));
-withClientToDomainMappings("nl.ordina.rogier.kookschriften.domain.DatastoreValueObject", Arrays.asList("nl.ordina.rogier.kookschriften.shared.proxy.DatastoreValueObjectProxy"));
 withClientToDomainMappings("nl.ordina.rogier.kookschriften.domain.Ingredient", Arrays.asList("nl.ordina.rogier.kookschriften.shared.proxy.IngredientProxy"));
+withClientToDomainMappings("nl.ordina.rogier.kookschriften.domain.IngredientRegel", Arrays.asList("nl.ordina.rogier.kookschriften.shared.proxy.IngredientRegelProxy"));
 withClientToDomainMappings("nl.ordina.rogier.kookschriften.domain.Recept", Arrays.asList("nl.ordina.rogier.kookschriften.shared.proxy.ReceptProxy"));
 withClientToDomainMappings("nl.ordina.rogier.kookschriften.domain.Tag", Arrays.asList("nl.ordina.rogier.kookschriften.shared.proxy.TagProxy"));
 withClientToDomainMappings("nl.ordina.rogier.kookschriften.domain.UploadedImage", Arrays.asList("nl.ordina.rogier.kookschriften.shared.proxy.UploadedImageProxy"));

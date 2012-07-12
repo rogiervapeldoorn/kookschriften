@@ -55,7 +55,14 @@ import com.googlecode.objectify.util.DAOBase;
     public static Void save(Recept recept)
     {
 	Objectify objectify=ObjectifyService.begin();
-	Key<Recept> receptKey=objectify.put(recept);
+	objectify.put(recept);
+	return null;
+    }
+    
+    public static Void delete(Long id)
+    {
+	Objectify objectify=ObjectifyService.begin();
+	objectify.delete(new Key<Recept>(Recept.class, id));
 	return null;
     }
 }

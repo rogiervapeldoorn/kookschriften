@@ -6,6 +6,7 @@ import nl.ordina.rogier.kookschriften.client.view.HistoryToken;
 import nl.ordina.rogier.kookschriften.client.view.HomeView;
 import nl.ordina.rogier.kookschriften.client.view.ReceptToevoegenView;
 import nl.ordina.rogier.kookschriften.client.view.ReceptenZoekenView;
+import nl.ordina.rogier.kookschriften.shared.proxy.DatastoreObjectProxy;
 
 import com.google.gwt.event.logical.shared.ValueChangeEvent;
 import com.google.gwt.event.logical.shared.ValueChangeHandler;
@@ -20,10 +21,10 @@ public class HistoryManager implements ValueChangeHandler<String> {
 
     @Override
     public void onValueChange(ValueChangeEvent<String> event) {
-	changeValue(HistoryToken.valueOf(event.getValue()));
+	changeValue(HistoryToken.valueOf(event.getValue()),null);
     }
 
-    public void changeValue(HistoryToken selectedMenuItem) {
+    public void changeValue(HistoryToken selectedMenuItem,DatastoreObjectProxy datastoreObjectProxy) {
 	
 	switch (selectedMenuItem) {
 	case Home: {
@@ -39,7 +40,7 @@ public class HistoryManager implements ValueChangeHandler<String> {
 	    break;
 	}
 	case ReceptToevoegen: {
-	    controller.changeWidget(new ReceptToevoegenView(this));
+	    controller.changeWidget(new ReceptToevoegenView(this,datastoreObjectProxy));
 	    break;
 	}
 	default:
