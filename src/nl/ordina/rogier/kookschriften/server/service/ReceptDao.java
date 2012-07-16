@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import nl.ordina.rogier.kookschriften.domain.IngredientRegel;
+import nl.ordina.rogier.kookschriften.domain.LoginInfo;
 import nl.ordina.rogier.kookschriften.domain.Recept;
 
 import com.googlecode.objectify.Key;
@@ -22,15 +23,39 @@ import com.googlecode.objectify.util.DAOBase;
 		ObjectifyService.register(IngredientRegel.class);
 	}
 
-    public static List<Recept> findAllRecepten()
-    {
-	return null;
-    }
-    public static List<Recept> findMyRecepten()
+    public static List<Recept> findAllRecepten(Recept params)
     {
 	Objectify objectify=ObjectifyService.begin();
 	List<Recept> result=new ArrayList<Recept>();
 	Query<Recept> recepten=objectify.query(Recept.class);
+	if(params.getAfkomstigVan()!=null&&!params.getAfkomstigVan().equals(""))
+	{
+	    recepten.filter("afkomstigVan", params.getAfkomstigVan());
+	}
+	if(params.getNaamRecept()!=null&&!params.getNaamRecept().equals(""))
+	{
+	    recepten.filter("naamRecept", params.getNaamRecept());
+	}
+	if(params.getSoortKeuken()!=null)
+	{
+	    recepten.filter("soortKeuken", params.getSoortKeuken());
+	}
+	if(params.getSoortRecept()!=null)
+	{
+	    recepten.filter("soortRecept", params.getSoortRecept());
+	}
+	for (Recept recept : recepten) {
+	    result.add(recept);
+	}
+	return result;
+    }
+    public static List<Recept> findMyRecepten()
+    {
+	LoginInfo loginInfo=LoginDao.login("");
+	String emailAdress=loginInfo.getEmailAddress();
+	Objectify objectify=ObjectifyService.begin();
+	List<Recept> result=new ArrayList<Recept>();
+	Query<Recept> recepten=objectify.query(Recept.class).filter("afkomstigVan", emailAdress);
 	for (Recept recept : recepten) {
 	    result.add(recept);
 	}
@@ -54,6 +79,8 @@ import com.googlecode.objectify.util.DAOBase;
     }
     public static Void save(Recept recept)
     {
+	LoginInfo loginInfo=LoginDao.login("");
+	recept.setAfkomstigVan(loginInfo.getEmailAddress());
 	Objectify objectify=ObjectifyService.begin();
 	objectify.put(recept);
 	return null;

@@ -41,6 +41,10 @@ public class ReceptToevoegenView extends Composite implements HasText {
     @UiField
     public ListBox soortRecept;
     @UiField
+    public ListBox soortKeuken;
+    @UiField
+    public ListBox aantalPersonen;
+    @UiField
     public Button opslaan;
     @UiField
     public HorizontalPanel tumbnails;
@@ -54,7 +58,6 @@ public class ReceptToevoegenView extends Composite implements HasText {
     @UiField public TextBox bereidingsTijd;
     @UiField public ListBox tijdEenheid;
     @UiField public TextArea bereiding;
-    @UiField public TextBox afkomstigVan;
     @UiField public HTMLPanel mainPanel;
     
     public ReceptProxy receptProxy;

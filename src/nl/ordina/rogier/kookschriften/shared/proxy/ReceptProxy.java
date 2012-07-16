@@ -2,11 +2,11 @@ package nl.ordina.rogier.kookschriften.shared.proxy;
 
 import java.util.List;
 
+import nl.ordina.rogier.kookschriften.client.SoortKeuken;
 import nl.ordina.rogier.kookschriften.client.SoortRecept;
 import nl.ordina.rogier.kookschriften.client.TijdEenheid;
 import nl.ordina.rogier.kookschriften.domain.Recept;
 import nl.ordina.rogier.kookschriften.server.locator.ObjectifyLocator;
-import nl.ordina.rogier.kookschriften.server.locator.ReceptLocator;
 
 import com.google.web.bindery.requestfactory.shared.ProxyFor;
 
@@ -19,6 +19,10 @@ public interface ReceptProxy extends DatastoreObjectProxy {
     public void setNaamRecept(String naamRecept);
     public SoortRecept getSoortRecept();
     public void setSoortRecept(SoortRecept soortRecept);
+    public SoortKeuken getSoortKeuken();
+    public void setSoortKeuken(SoortKeuken soortKeuken);
+    public Integer getAantalPersonen();
+    public void setAantalPersonen(Integer aantalPersonen);
     public String getAfkomstigVan();
     public void setAfkomstigVan(String afkomstigVan);
     public String getBereiding();

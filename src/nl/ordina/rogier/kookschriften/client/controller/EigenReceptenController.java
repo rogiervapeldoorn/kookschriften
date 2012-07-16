@@ -71,30 +71,6 @@ public class EigenReceptenController implements ControllerInterface {
 	    @Override
 	    public void onSuccess(List<ReceptProxy> response) {
 		dataProvider.setList(response);
-
-		TextColumn<ReceptProxy> naamReceptColumn = new TextColumn<ReceptProxy>() {
-		    @Override
-		    public String getValue(ReceptProxy object) {
-			return object.getNaamRecept();
-		    }
-		};
-
-		eigenRecepten.dataGrid.addColumn(naamReceptColumn, "Recept");
-
-		TextColumn<ReceptProxy> urlColumn = new TextColumn<ReceptProxy>() {
-		    @Override
-		    public String getValue(ReceptProxy object) {
-			String urls = "URLS:";
-			if (object.getUploadedImages() != null) {
-			    for (String plaatjeId : object.getUploadedImages()) {
-				urls = urls + plaatjeId;
-			    }
-			}
-			return urls;
-		    }
-		};
-		eigenRecepten.dataGrid.addColumn(urlColumn, "URL");
-
 		ImageColumn<ReceptProxy> imageColumn = new ImageColumn<ReceptProxy>() {
 
 		    @Override
@@ -112,6 +88,37 @@ public class EigenReceptenController implements ControllerInterface {
 		};
 
 		eigenRecepten.dataGrid.addColumn(imageColumn, "plaatje");
+
+		TextColumn<ReceptProxy> naamReceptColumn = new TextColumn<ReceptProxy>() {
+		    @Override
+		    public String getValue(ReceptProxy object) {
+			return object.getNaamRecept();
+		    }
+		};
+
+		eigenRecepten.dataGrid.addColumn(naamReceptColumn, "Recept");
+
+		TextColumn<ReceptProxy> soortReceptColumn = new TextColumn<ReceptProxy>() {
+		    @Override
+		    public String getValue(ReceptProxy object) {
+			if (object.getSoortRecept() != null) {
+			    return object.getSoortRecept().toString();
+			}
+			return "";
+		    }
+		};
+		eigenRecepten.dataGrid.addColumn(soortReceptColumn, "Soort Recept");
+
+		TextColumn<ReceptProxy> soortKeukenColumn = new TextColumn<ReceptProxy>() {
+		    @Override
+		    public String getValue(ReceptProxy object) {
+			if (object.getSoortKeuken() != null) {
+			    return object.getSoortKeuken().toString();
+			}
+			return "";
+		    }
+		};
+		eigenRecepten.dataGrid.addColumn(soortKeukenColumn, "Soort Keuken");
 
 		TextColumn<ReceptProxy> afkomstigVanColumn = new TextColumn<ReceptProxy>() {
 		    @Override

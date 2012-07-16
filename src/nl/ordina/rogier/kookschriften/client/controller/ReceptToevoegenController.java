@@ -7,6 +7,7 @@ import nl.ordina.rogier.kookschriften.client.ExpensesRequestFactory;
 import nl.ordina.rogier.kookschriften.client.IngredientRequest;
 import nl.ordina.rogier.kookschriften.client.LoginRequest;
 import nl.ordina.rogier.kookschriften.client.ReceptRequest;
+import nl.ordina.rogier.kookschriften.client.SoortKeuken;
 import nl.ordina.rogier.kookschriften.client.SoortRecept;
 import nl.ordina.rogier.kookschriften.client.TijdEenheid;
 import nl.ordina.rogier.kookschriften.client.UploadUrlRequest;
@@ -16,21 +17,16 @@ import nl.ordina.rogier.kookschriften.client.model.HistoryManager;
 import nl.ordina.rogier.kookschriften.client.view.HistoryToken;
 import nl.ordina.rogier.kookschriften.client.view.IngredientView;
 import nl.ordina.rogier.kookschriften.client.view.ReceptToevoegenView;
-import nl.ordina.rogier.kookschriften.domain.LoginInfo;
 import nl.ordina.rogier.kookschriften.shared.proxy.IngredientProxy;
 import nl.ordina.rogier.kookschriften.shared.proxy.IngredientRegelProxy;
 import nl.ordina.rogier.kookschriften.shared.proxy.LoginInfoProxy;
 import nl.ordina.rogier.kookschriften.shared.proxy.ReceptProxy;
 
 import com.google.gwt.core.client.GWT;
-import com.google.gwt.dom.client.Element;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.user.client.ui.Button;
-import com.google.gwt.user.client.ui.DialogBox;
 import com.google.gwt.user.client.ui.FormPanel;
-import com.google.gwt.user.client.ui.HTML;
-import com.google.gwt.user.client.ui.VerticalPanel;
 import com.google.gwt.user.client.ui.FormPanel.SubmitCompleteEvent;
 import com.google.gwt.user.client.ui.Image;
 import com.google.gwt.user.client.ui.MultiWordSuggestOracle;
@@ -71,6 +67,10 @@ public class ReceptToevoegenController implements ControllerInterface {
 		    historyManager.changeValue(HistoryToken.Login, response);
 		    HistoryToken.Login.fire();    
 		}
+		else
+		{
+		    loggedInView();
+		}
 	    }
 	});
 	
@@ -80,6 +80,8 @@ public class ReceptToevoegenController implements ControllerInterface {
 	
 	UtilController.initSoortRecept(receptToevoegen.soortRecept);
 	UtilController.initTijdEenheid(receptToevoegen.tijdEenheid);
+	UtilController.initSoortKeuken(receptToevoegen.soortKeuken);
+	UtilController.initAantalPersonen(receptToevoegen.aantalPersonen);
 	addValues();
 	IngredientRequest ingredientRequest = requestFactory.ingredientRequest();
 	Request<List<IngredientProxy>> request = ingredientRequest.findAll();
@@ -116,7 +118,6 @@ public class ReceptToevoegenController implements ControllerInterface {
 
     private void addValues() {
 	if (receptToevoegen.receptProxy != null) {
-	    receptToevoegen.afkomstigVan.setValue(receptToevoegen.receptProxy.getAfkomstigVan());
 	    receptToevoegen.bereiding.setValue(receptToevoegen.receptProxy.getBereiding());
 	    receptToevoegen.bereidingsTijd.setValue(receptToevoegen.receptProxy.getBereidingsTijd());
 	    receptToevoegen.naamRecept.setValue(receptToevoegen.receptProxy.getNaamRecept());
@@ -126,6 +127,12 @@ public class ReceptToevoegenController implements ControllerInterface {
 	    }
 	    if (receptToevoegen.receptProxy.getSoortRecept() != null) {
 		UtilController.selectItem(receptToevoegen.soortRecept, receptToevoegen.receptProxy.getSoortRecept().toString());
+	    }
+	    if (receptToevoegen.receptProxy.getSoortKeuken() != null) {
+		UtilController.selectItem(receptToevoegen.soortKeuken, receptToevoegen.receptProxy.getSoortKeuken().toString());
+	    }
+	    if (receptToevoegen.receptProxy.getAantalPersonen() != null) {
+		UtilController.selectItem(receptToevoegen.aantalPersonen, receptToevoegen.receptProxy.getAantalPersonen().toString());
 	    }
 	    if (receptToevoegen.receptProxy.getBereidingsTijdEenheid() != null) {
 		UtilController.selectItem(receptToevoegen.tijdEenheid, receptToevoegen.receptProxy.getBereidingsTijdEenheid().toString());
@@ -190,7 +197,10 @@ public class ReceptToevoegenController implements ControllerInterface {
 		receptToevoegen.uploadForm.reset();
 		startNewBlobstoreSession();
 		String imageUrl = event.getResults();
-		addImage(imageUrl);
+		if (imageUrl!=null&&!imageUrl.equals(""))
+		{
+		    addImage(imageUrl);
+		}
 		receptToevoegen.uploadField.setEnabled(true);
 		receptToevoegen.uploadButton.setEnabled(true);
 		receptToevoegen.uploadButton.setText("Upload");
@@ -227,11 +237,12 @@ public class ReceptToevoegenController implements ControllerInterface {
 	    receptProxy.setVersion(receptToevoegen.receptProxy.getVersion());
 	}
 	receptProxy.setNaamRecept(receptToevoegen.naamRecept.getValue());
-	receptProxy.setAfkomstigVan(receptToevoegen.afkomstigVan.getValue());
 	receptProxy.setBereiding(receptToevoegen.bereiding.getValue());
 	receptProxy.setBereidingsTijd(receptToevoegen.bereidingsTijd.getValue());
 	receptProxy.setBereidingsTijdEenheid(TijdEenheid.valueOf(receptToevoegen.tijdEenheid.getValue(receptToevoegen.tijdEenheid.getSelectedIndex())));
 	receptProxy.setSoortRecept(SoortRecept.valueOf(receptToevoegen.soortRecept.getValue(receptToevoegen.soortRecept.getSelectedIndex())));
+	receptProxy.setSoortKeuken(SoortKeuken.valueOf(receptToevoegen.soortKeuken.getValue(receptToevoegen.soortKeuken.getSelectedIndex())));
+	receptProxy.setAantalPersonen(new Integer(receptToevoegen.aantalPersonen.getValue(receptToevoegen.aantalPersonen.getSelectedIndex())));
 
 	receptProxy.setUploadedImages(uploadedImages);
 	List<IngredientRegelProxy> list = new ArrayList<IngredientRegelProxy>();

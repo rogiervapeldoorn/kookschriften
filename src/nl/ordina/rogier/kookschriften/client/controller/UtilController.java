@@ -1,5 +1,7 @@
 package nl.ordina.rogier.kookschriften.client.controller;
 
+import nl.ordina.rogier.kookschriften.client.GewichtEenheid;
+import nl.ordina.rogier.kookschriften.client.SoortKeuken;
 import nl.ordina.rogier.kookschriften.client.SoortRecept;
 import nl.ordina.rogier.kookschriften.client.TijdEenheid;
 
@@ -13,6 +15,7 @@ public class UtilController {
 	    soortRecept.addItem(soortReceptvalue.toString());
 	}
     }
+
     public static void initTijdEenheid(ListBox tijdEenheid) {
 	TijdEenheid[] tijdEenheden = TijdEenheid.values();
 	for (TijdEenheid tijdEenheidValue : tijdEenheden) {
@@ -20,14 +23,31 @@ public class UtilController {
 	}
     }
 
+    public static void initSoortKeuken(ListBox soortKeuken) {
+	SoortKeuken[] soortKeukens = SoortKeuken.values();
+	for (SoortKeuken soortKeukenValue : soortKeukens) {
+	    soortKeuken.addItem(soortKeukenValue.toString());
+	}
+    }
+    
+    public static void initAantalPersonen(ListBox aantalPersonen) {
+	for (int i=1;i<13;i++) {
+	    aantalPersonen.addItem(""+i);
+	}
+    }
+    public static void initGewichtsEenheid(ListBox eenheid) {
+	GewichtEenheid[] gewichtEenhedenArray = GewichtEenheid.values();
+	for (GewichtEenheid gewichtEenheid : gewichtEenhedenArray) {
+	    eenheid.addItem(gewichtEenheid.toString());
+	}
+    }
+
     public static void selectItem(ListBox listBox, String string) {
-	for (int i = 0; i<listBox.getItemCount();i++)
-	    {
-		if (listBox.getItemText(i).equals(string))
-		{
-		    listBox.setSelectedIndex(i);
-		    break;
-		}
+	for (int i = 0; i < listBox.getItemCount(); i++) {
+	    if (listBox.getItemText(i).equals(string)) {
+		listBox.setSelectedIndex(i);
+		break;
 	    }
+	}
     }
 }

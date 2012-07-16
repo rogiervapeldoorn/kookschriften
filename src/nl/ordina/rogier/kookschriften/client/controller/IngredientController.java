@@ -21,10 +21,7 @@ public class IngredientController implements ControllerInterface{
     }
 
     public void init() {
-	GewichtEenheid[] gewichtEenhedenArray=GewichtEenheid.values();
-	for (GewichtEenheid gewichtEenheid : gewichtEenhedenArray) {
-	    ingredient.Eenheid.addItem(gewichtEenheid.toString());
-	}
+	UtilController.initGewichtsEenheid(ingredient.Eenheid);
 	if (ingredient.ingredientRegelProxy!=null)
 	{
 	    if (ingredient.ingredientRegelProxy.getGewicht()!=null)

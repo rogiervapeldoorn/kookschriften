@@ -2,11 +2,13 @@ package nl.ordina.rogier.kookschriften.client.view;
 
 import nl.ordina.rogier.kookschriften.client.controller.ControllerFactory;
 import nl.ordina.rogier.kookschriften.client.controller.ControllerInterface;
+import nl.ordina.rogier.kookschriften.shared.proxy.ReceptProxy;
 
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.user.cellview.client.DataGrid;
+import com.google.gwt.user.cellview.client.SimplePager;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.HasText;
@@ -21,14 +23,18 @@ public class ReceptenZoekenView extends Composite implements HasText {
     @UiField
     public ListBox soortRecept;
     @UiField
+    public ListBox soortKeuken;
+    @UiField
     public TextBox ingredient;
     @UiField
     public TextBox afkomstigVan;
     @UiField
     public Button zoeken;
     @UiField
-    public DataGrid<String> dataGrid;
-    
+    public DataGrid<ReceptProxy> dataGrid;
+    @UiField
+    public SimplePager pager;
+
 
     private static ReceptenZoekenUiBinder uiBinder = GWT.create(ReceptenZoekenUiBinder.class);
 

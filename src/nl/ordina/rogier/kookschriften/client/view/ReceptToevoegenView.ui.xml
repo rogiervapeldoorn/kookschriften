@@ -26,6 +26,22 @@
 			</g:row>
 			<g:row>
 				<g:customCell>
+					<g:Label text="Soort keuken:"/>
+				</g:customCell>
+				<g:customCell>
+					<g:ListBox ui:field="soortKeuken" width="173px" height="34"/>
+				</g:customCell>
+			</g:row>
+			<g:row>
+				<g:customCell>
+					<g:Label text="Aantal Personen:"/>
+				</g:customCell>
+				<g:customCell>
+					<g:ListBox ui:field="aantalPersonen" width="173px" height="34"/>
+				</g:customCell>
+			</g:row>
+			<g:row>
+				<g:customCell>
 					<g:Label text="Ingrediënten:"/>
 				</g:customCell>
 				<g:customCell>
@@ -33,14 +49,6 @@
 						<g:VerticalPanel ui:field="ingredienten"/>
 						<g:VerticalPanel/>
 					</g:HorizontalPanel>
-				</g:customCell>
-			</g:row>
-			<g:row>
-				<g:customCell>
-					<g:Label text="Afkomstig van:"/>
-				</g:customCell>
-				<g:customCell>
-					<g:TextBox ui:field="afkomstigVan"/>
 				</g:customCell>
 			</g:row>
 			<g:row>

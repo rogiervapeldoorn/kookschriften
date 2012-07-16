@@ -12,7 +12,7 @@ import com.googlecode.objectify.Key;
 
 @Service(ReceptDao.class)
 public interface ReceptRequest extends RequestContext{
-    Request<List<ReceptProxy>> findAllRecepten();
+    Request<List<ReceptProxy>> findAllRecepten(ReceptProxy receptProxy);
     Request<List<ReceptProxy>> findMyRecepten();
     Request<ReceptProxy> findRecept(Long id);
     Request<Void> save(ReceptProxy receptProxy);

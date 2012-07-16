@@ -26,6 +26,14 @@
 			</g:row>
 			<g:row>
 				<g:customCell>
+					<g:Label text="Soort keuken:"/>
+				</g:customCell>
+				<g:customCell>
+					<g:ListBox ui:field="soortKeuken" width="173px" height="34"/>
+				</g:customCell>
+			</g:row>
+			<g:row>
+				<g:customCell>
 					<g:Label text="Ingrediënt:"/>
 				</g:customCell>
 				<g:customCell>
@@ -44,8 +52,8 @@
 				</g:customCell>
 			</g:row>
 		</g:Grid>
-		<p1:DataGrid width="100%" height="90%" ui:field="dataGrid"/>
-		<p1:SimplePager location="CENTER"/>
+		<p1:DataGrid width="100%" height="550px" ui:field="dataGrid"/>
+		<p1:SimplePager location="CENTER" ui:field="pager"/>
 		
 		
 	</g:HTMLPanel>

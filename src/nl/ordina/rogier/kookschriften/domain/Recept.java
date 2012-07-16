@@ -6,6 +6,7 @@ import java.util.List;
 import javax.persistence.Embedded;
 import javax.persistence.Entity;
 
+import nl.ordina.rogier.kookschriften.client.SoortKeuken;
 import nl.ordina.rogier.kookschriften.client.SoortRecept;
 import nl.ordina.rogier.kookschriften.client.TijdEenheid;
 
@@ -15,9 +16,11 @@ import com.googlecode.objectify.annotation.Cached;
 @Entity
 public class Recept extends DatastoreObject {
    
-    private String email;
+        private String email;
     private String naamRecept;
     private SoortRecept soortRecept;
+    private SoortKeuken soortKeuken;
+    private Integer aantalPersonen;
     private String afkomstigVan;
     private String bereiding;
     private String bereidingsTijd;
@@ -25,6 +28,23 @@ public class Recept extends DatastoreObject {
     private List<String> uploadedImages;
     @Embedded 
     private List<IngredientRegel> ingredienten=new ArrayList<IngredientRegel>();
+
+    public SoortKeuken getSoortKeuken() {
+        return soortKeuken;
+    }
+
+    public void setSoortKeuken(SoortKeuken soortKeuken) {
+        this.soortKeuken = soortKeuken;
+    }
+
+
+    public Integer getAantalPersonen() {
+        return aantalPersonen;
+    }
+
+    public void setAantalPersonen(Integer aantalPersonen) {
+        this.aantalPersonen = aantalPersonen;
+    }
     
     public List<IngredientRegel> getIngredienten() {
         return ingredienten;

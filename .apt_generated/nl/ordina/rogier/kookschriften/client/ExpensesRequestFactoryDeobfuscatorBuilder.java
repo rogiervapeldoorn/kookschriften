@@ -83,10 +83,10 @@ withOperation(new OperationKey("SmbB5ED$vgwcpeVg$sTfVMUPHHU="),
   .withMethodName("delete")
   .withRequestContext("nl.ordina.rogier.kookschriften.client.ReceptRequest")
   .build());
-withOperation(new OperationKey("BWvoAzF5L6B7rvY1jcCpWCx8O34="),
+withOperation(new OperationKey("ggFSSdHFtYYwIG5iEbFBMRNW47s="),
   new OperationData.Builder()
-  .withClientMethodDescriptor("()Lcom/google/web/bindery/requestfactory/shared/Request;")
-  .withDomainMethodDescriptor("()Ljava/util/List;")
+  .withClientMethodDescriptor("(Lnl/ordina/rogier/kookschriften/shared/proxy/ReceptProxy;)Lcom/google/web/bindery/requestfactory/shared/Request;")
+  .withDomainMethodDescriptor("(Lnl/ordina/rogier/kookschriften/domain/Recept;)Ljava/util/List;")
   .withMethodName("findAllRecepten")
   .withRequestContext("nl.ordina.rogier.kookschriften.client.ReceptRequest")
   .build());
