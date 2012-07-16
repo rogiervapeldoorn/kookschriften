@@ -9,9 +9,9 @@
 	<g:HTMLPanel>
 		<g:MenuBar ui:field="menuBar">
 			<g:MenuItem ui:field="homeMenuItem" text="Home"/>
-			<g:MenuItemSeparator/>
+			<g:MenuItemSeparator ui:field="receptToevoegenSeparator"/>
 			<g:MenuItem ui:field="receptToevoegenMenuItem" text="Toevoegen Recepten"/>
-			<g:MenuItemSeparator/>
+			<g:MenuItemSeparator ui:field="eigenReceptenSeparator"/>
 			<g:MenuItem ui:field="eigenReceptenMenuItem" text="Eigen Recepten"/>
 			<g:MenuItemSeparator/>
 			<g:MenuItem ui:field="receptenZoekenMenuItem" text="Recepten zoeken"/>

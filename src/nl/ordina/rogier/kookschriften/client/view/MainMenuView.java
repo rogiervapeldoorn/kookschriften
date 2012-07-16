@@ -32,52 +32,73 @@ public class MainMenuView extends Composite implements HasText {
     private final ExpensesRequestFactory requestFactory = GWT.create(ExpensesRequestFactory.class);
 
     private static MainMenuUiBinder uiBinder = GWT.create(MainMenuUiBinder.class);
-    @UiField MenuBar menuBar;
-    @UiField MenuItem homeMenuItem;
-    @UiField MenuItem eigenReceptenMenuItem;
-    @UiField MenuItem receptToevoegenMenuItem;
-    @UiField MenuItem receptenZoekenMenuItem;
-    @UiField HTMLPanel appSpace;
+    @UiField
+    MenuBar menuBar;
+    @UiField
+    MenuItem homeMenuItem;
+    @UiField
+    MenuItem eigenReceptenMenuItem;
+    @UiField
+    MenuItemSeparator eigenReceptenSeparator;
+    @UiField
+    MenuItem receptToevoegenMenuItem;
+    @UiField
+    MenuItemSeparator receptToevoegenSeparator;
+    @UiField
+    MenuItem receptenZoekenMenuItem;
+    @UiField
+    HTMLPanel appSpace;
     private HistoryManager historyManager;
+
     interface MainMenuUiBinder extends UiBinder<Widget, MainMenuView> {
     }
 
     public MainMenuView() {
 	initWidget(uiBinder.createAndBindUi(this));
 	homeMenuItem.setCommand(new MenuCommandView(HistoryToken.Home));
+	eigenReceptenMenuItem.setVisible(false);
+	eigenReceptenSeparator.setVisible(false);
+	receptToevoegenMenuItem.setVisible(false);
+	receptToevoegenSeparator.setVisible(false);
 	eigenReceptenMenuItem.setCommand(new MenuCommandView(HistoryToken.EigenRecepten));
 	receptToevoegenMenuItem.setCommand(new MenuCommandView(HistoryToken.ReceptToevoegen));
 	receptenZoekenMenuItem.setCommand(new MenuCommandView(HistoryToken.ReceptenZoeken));
 	final EventBus eventBus = new SimpleEventBus();
 	requestFactory.initialize(eventBus);
-	LoginRequest loginRequest=requestFactory.loginRequest();
-	Request<LoginInfoProxy> loginRequestProxy=loginRequest.login(GWT.getHostPageBaseURL());
+	LoginRequest loginRequest = requestFactory.loginRequest();
+	Request<LoginInfoProxy> loginRequestProxy = loginRequest.login(GWT.getHostPageBaseURL());
 	loginRequestProxy.fire(new Receiver<LoginInfoProxy>() {
 
 	    @Override
 	    public void onSuccess(LoginInfoProxy response) {
 		Anchor signInOutLink = new Anchor();
-		if (response.isLoggedIn())
-		{
+		if (response.isLoggedIn()) {
+		    eigenReceptenMenuItem.setVisible(true);
+		    eigenReceptenSeparator.setVisible(true);
+		    receptToevoegenMenuItem.setVisible(true);
+		    receptToevoegenSeparator.setVisible(true);
+
 		    signInOutLink.setText("Logout");
-		    signInOutLink.setHref( response.getLogoutUrl());
-		}else
-		{
+		    signInOutLink.setHref(response.getLogoutUrl());
+		} else {
+		    eigenReceptenMenuItem.setVisible(false);
+		    eigenReceptenSeparator.setVisible(false);
+		    receptToevoegenMenuItem.setVisible(false);
+		    receptToevoegenSeparator.setVisible(false);
 		    signInOutLink.setText("Login");
-		    signInOutLink.setHref( response.getLoginUrl());
+		    signInOutLink.setHref(response.getLoginUrl());
 		}
 		RootPanel loginoutPanel = RootPanel.get("loginout");
 		loginoutPanel.add(signInOutLink);
-		
+
 	    }
 	});
-	HistoryController controller=new HistoryController(appSpace);
-	historyManager=new HistoryManager(controller);
+	HistoryController controller = new HistoryController(appSpace);
+	historyManager = new HistoryManager(controller);
 	History.addValueChangeHandler(historyManager);
 	HistoryToken.Home.fire();
 	History.fireCurrentHistoryState();
     }
-    
 
     public void setText(String text) {
     }
