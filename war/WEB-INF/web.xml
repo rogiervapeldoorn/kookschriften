@@ -7,7 +7,7 @@
  
 	<servlet>
 		<servlet-name>uploadServlet</servlet-name>
-		<servlet-class>nl.ordina.rogier.kookschriften.server.UploadServlet</servlet-class>
+		<servlet-class>nl.ordina.rogier.mijnkookschrift.server.UploadServlet</servlet-class>
 	</servlet>
 
 
@@ -35,7 +35,7 @@
 
 	<!-- Default page to serve -->
 	<welcome-file-list>
-		<welcome-file>kookschriften.html</welcome-file>
+		<welcome-file>mijnkookschrift.html</welcome-file>
 	</welcome-file-list>
 
   
