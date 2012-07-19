@@ -1,4 +1,4 @@
-package nl.ordina.rogier.mijnkookschrift.client.controller;
+package nl.ordina.rogier.mijnkookschrift.client.view;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -14,9 +14,6 @@ import nl.ordina.rogier.mijnkookschrift.client.UploadUrlRequest;
 import nl.ordina.rogier.mijnkookschrift.client.events.NewIngredientEvent;
 import nl.ordina.rogier.mijnkookschrift.client.events.NewIngredientEventHandler;
 import nl.ordina.rogier.mijnkookschrift.client.model.HistoryManager;
-import nl.ordina.rogier.mijnkookschrift.client.view.HistoryToken;
-import nl.ordina.rogier.mijnkookschrift.client.view.IngredientView;
-import nl.ordina.rogier.mijnkookschrift.client.view.ReceptToevoegenView;
 import nl.ordina.rogier.mijnkookschrift.shared.proxy.IngredientProxy;
 import nl.ordina.rogier.mijnkookschrift.shared.proxy.IngredientRegelProxy;
 import nl.ordina.rogier.mijnkookschrift.shared.proxy.LoginInfoProxy;

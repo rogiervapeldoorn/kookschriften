@@ -1,10 +1,6 @@
-package nl.ordina.rogier.mijnkookschrift.client.controller;
+package nl.ordina.rogier.mijnkookschrift.client.view;
 
 import nl.ordina.rogier.mijnkookschrift.client.model.HistoryManager;
-import nl.ordina.rogier.mijnkookschrift.client.view.EigenReceptenView;
-import nl.ordina.rogier.mijnkookschrift.client.view.IngredientView;
-import nl.ordina.rogier.mijnkookschrift.client.view.ReceptToevoegenView;
-import nl.ordina.rogier.mijnkookschrift.client.view.ReceptenZoekenView;
 
 public class ControllerFactory {
 

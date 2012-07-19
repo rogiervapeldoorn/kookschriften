@@ -1,7 +1,7 @@
 package nl.ordina.rogier.mijnkookschrift.client.model;
 
-import nl.ordina.rogier.mijnkookschrift.client.controller.HistoryController;
 import nl.ordina.rogier.mijnkookschrift.client.view.EigenReceptenView;
+import nl.ordina.rogier.mijnkookschrift.client.view.HistoryController;
 import nl.ordina.rogier.mijnkookschrift.client.view.HistoryToken;
 import nl.ordina.rogier.mijnkookschrift.client.view.HomeView;
 import nl.ordina.rogier.mijnkookschrift.client.view.LoginView;

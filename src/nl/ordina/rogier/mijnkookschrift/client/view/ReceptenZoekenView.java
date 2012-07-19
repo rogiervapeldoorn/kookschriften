@@ -1,7 +1,5 @@
 package nl.ordina.rogier.mijnkookschrift.client.view;
 
-import nl.ordina.rogier.mijnkookschrift.client.controller.ControllerFactory;
-import nl.ordina.rogier.mijnkookschrift.client.controller.ControllerInterface;
 import nl.ordina.rogier.mijnkookschrift.shared.proxy.ReceptProxy;
 
 import com.google.gwt.core.client.GWT;
@@ -19,21 +17,21 @@ import com.google.gwt.user.client.ui.Widget;
 public class ReceptenZoekenView extends Composite implements HasText {
 
     @UiField
-    public TextBox naamRecept;
+    TextBox naamRecept;
     @UiField
-    public ListBox soortRecept;
+    ListBox soortRecept;
     @UiField
-    public ListBox soortKeuken;
+    ListBox soortKeuken;
     @UiField
-    public TextBox ingredient;
+    TextBox ingredient;
     @UiField
-    public TextBox afkomstigVan;
+    TextBox afkomstigVan;
     @UiField
-    public Button zoeken;
+    Button zoeken;
     @UiField
-    public DataGrid<ReceptProxy> dataGrid;
+    DataGrid<ReceptProxy> dataGrid;
     @UiField
-    public SimplePager pager;
+    SimplePager pager;
 
 
     private static ReceptenZoekenUiBinder uiBinder = GWT.create(ReceptenZoekenUiBinder.class);

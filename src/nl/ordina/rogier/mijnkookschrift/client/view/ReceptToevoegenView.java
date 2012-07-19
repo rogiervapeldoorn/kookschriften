@@ -2,8 +2,6 @@ package nl.ordina.rogier.mijnkookschrift.client.view;
 
 import java.util.logging.Logger;
 
-import nl.ordina.rogier.mijnkookschrift.client.controller.ControllerFactory;
-import nl.ordina.rogier.mijnkookschrift.client.controller.ControllerInterface;
 import nl.ordina.rogier.mijnkookschrift.client.model.HistoryManager;
 import nl.ordina.rogier.mijnkookschrift.shared.proxy.DatastoreObjectProxy;
 import nl.ordina.rogier.mijnkookschrift.shared.proxy.ReceptProxy;
@@ -37,30 +35,30 @@ public class ReceptToevoegenView extends Composite implements HasText {
     }
 
     @UiField
-    public TextBox naamRecept;
+    TextBox naamRecept;
     @UiField
-    public ListBox soortRecept;
+    ListBox soortRecept;
     @UiField
-    public ListBox soortKeuken;
+    ListBox soortKeuken;
     @UiField
-    public ListBox aantalPersonen;
+    ListBox aantalPersonen;
     @UiField
-    public Button opslaan;
+    Button opslaan;
     @UiField
-    public HorizontalPanel tumbnails;
+    HorizontalPanel tumbnails;
     @UiField
-    public FileUpload uploadField;
+    FileUpload uploadField;
     @UiField
-    public Button uploadButton;
+    Button uploadButton;
     @UiField
-    public FormPanel uploadForm;
-    @UiField public VerticalPanel ingredienten;
-    @UiField public TextBox bereidingsTijd;
-    @UiField public ListBox tijdEenheid;
-    @UiField public TextArea bereiding;
-    @UiField public HTMLPanel mainPanel;
+    FormPanel uploadForm;
+    @UiField VerticalPanel ingredienten;
+    @UiField TextBox bereidingsTijd;
+    @UiField ListBox tijdEenheid;
+    @UiField TextArea bereiding;
+    @UiField HTMLPanel mainPanel;
     
-    public ReceptProxy receptProxy;
+    ReceptProxy receptProxy;
     public ReceptToevoegenView(HistoryManager historyManager,DatastoreObjectProxy datastoreObjectProxy) {
 	receptProxy=(ReceptProxy) datastoreObjectProxy;
 	initWidget(uiBinder.createAndBindUi(this));

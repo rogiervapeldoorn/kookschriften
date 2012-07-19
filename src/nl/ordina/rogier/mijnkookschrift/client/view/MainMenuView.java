@@ -2,7 +2,6 @@ package nl.ordina.rogier.mijnkookschrift.client.view;
 
 import nl.ordina.rogier.mijnkookschrift.client.ExpensesRequestFactory;
 import nl.ordina.rogier.mijnkookschrift.client.LoginRequest;
-import nl.ordina.rogier.mijnkookschrift.client.controller.HistoryController;
 import nl.ordina.rogier.mijnkookschrift.client.model.HistoryManager;
 import nl.ordina.rogier.mijnkookschrift.shared.proxy.LoginInfoProxy;
 

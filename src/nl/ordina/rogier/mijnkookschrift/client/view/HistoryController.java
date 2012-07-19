@@ -1,4 +1,4 @@
-package nl.ordina.rogier.mijnkookschrift.client.controller;
+package nl.ordina.rogier.mijnkookschrift.client.view;
 
 import com.google.gwt.user.client.ui.HTMLPanel;
 import com.google.gwt.user.client.ui.Widget;

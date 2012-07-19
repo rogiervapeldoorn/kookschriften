@@ -5,8 +5,6 @@ import java.util.List;
 
 import nl.ordina.rogier.mijnkookschrift.client.GewichtEenheid;
 import nl.ordina.rogier.mijnkookschrift.client.ReceptRequest;
-import nl.ordina.rogier.mijnkookschrift.client.controller.ControllerFactory;
-import nl.ordina.rogier.mijnkookschrift.client.controller.ControllerInterface;
 import nl.ordina.rogier.mijnkookschrift.client.events.NewIngredientEvent;
 import nl.ordina.rogier.mijnkookschrift.client.events.NewIngredientEventHandler;
 import nl.ordina.rogier.mijnkookschrift.shared.proxy.IngredientRegelProxy;
@@ -35,16 +33,16 @@ public class IngredientView extends Composite implements HasText, HasHandlers {
     private HandlerManager handlerManager;
 
     
-    public MultiWordSuggestOracle ingredients = new MultiWordSuggestOracle();
-    public List<String> listofIngredients=new ArrayList<String>();
+    MultiWordSuggestOracle ingredients = new MultiWordSuggestOracle();
+    List<String> listofIngredients=new ArrayList<String>();
     private static IngredientUiBinder uiBinder = GWT.create(IngredientUiBinder.class);
     @UiField(provided = true) 
-    public SuggestBox Ingredient;
+    SuggestBox Ingredient;
     @UiField
-    public ListBox Eenheid;
+    ListBox Eenheid;
     @UiField
-    public TextBox Gewicht;
-    public IngredientRegelProxy ingredientRegelProxy;
+    TextBox Gewicht;
+    IngredientRegelProxy ingredientRegelProxy;
     
     interface IngredientUiBinder extends UiBinder<Widget, IngredientView> {
     }

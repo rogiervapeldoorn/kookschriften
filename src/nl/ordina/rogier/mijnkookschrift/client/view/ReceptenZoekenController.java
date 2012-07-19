@@ -1,4 +1,4 @@
-package nl.ordina.rogier.mijnkookschrift.client.controller;
+package nl.ordina.rogier.mijnkookschrift.client.view;
 
 import java.util.List;
 
@@ -6,7 +6,6 @@ import nl.ordina.rogier.mijnkookschrift.client.ExpensesRequestFactory;
 import nl.ordina.rogier.mijnkookschrift.client.ReceptRequest;
 import nl.ordina.rogier.mijnkookschrift.client.SoortKeuken;
 import nl.ordina.rogier.mijnkookschrift.client.SoortRecept;
-import nl.ordina.rogier.mijnkookschrift.client.view.ReceptenZoekenView;
 import nl.ordina.rogier.mijnkookschrift.shared.proxy.ReceptProxy;
 
 import com.google.gwt.core.client.GWT;

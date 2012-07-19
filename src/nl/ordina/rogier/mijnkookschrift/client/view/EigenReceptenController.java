@@ -1,4 +1,4 @@
-package nl.ordina.rogier.mijnkookschrift.client.controller;
+package nl.ordina.rogier.mijnkookschrift.client.view;
 
 import java.util.List;
 
@@ -8,9 +8,6 @@ import nl.ordina.rogier.mijnkookschrift.client.ExpensesRequestFactory;
 import nl.ordina.rogier.mijnkookschrift.client.ReceptRequest;
 import nl.ordina.rogier.mijnkookschrift.client.UploadedImageRequest;
 import nl.ordina.rogier.mijnkookschrift.client.model.HistoryManager;
-import nl.ordina.rogier.mijnkookschrift.client.view.EigenReceptenView;
-import nl.ordina.rogier.mijnkookschrift.client.view.HistoryToken;
-import nl.ordina.rogier.mijnkookschrift.client.view.ImageColumn;
 import nl.ordina.rogier.mijnkookschrift.shared.proxy.ReceptProxy;
 import nl.ordina.rogier.mijnkookschrift.shared.proxy.UploadedImageProxy;
 

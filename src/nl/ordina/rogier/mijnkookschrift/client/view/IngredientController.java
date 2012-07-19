@@ -1,8 +1,7 @@
-package nl.ordina.rogier.mijnkookschrift.client.controller;
+package nl.ordina.rogier.mijnkookschrift.client.view;
 
 import nl.ordina.rogier.mijnkookschrift.client.ExpensesRequestFactory;
 import nl.ordina.rogier.mijnkookschrift.client.GewichtEenheid;
-import nl.ordina.rogier.mijnkookschrift.client.view.IngredientView;
 
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.user.client.ui.ListBox;

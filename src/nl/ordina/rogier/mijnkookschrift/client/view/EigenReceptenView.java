@@ -1,7 +1,5 @@
 package nl.ordina.rogier.mijnkookschrift.client.view;
 
-import nl.ordina.rogier.mijnkookschrift.client.controller.ControllerFactory;
-import nl.ordina.rogier.mijnkookschrift.client.controller.ControllerInterface;
 import nl.ordina.rogier.mijnkookschrift.client.model.HistoryManager;
 import nl.ordina.rogier.mijnkookschrift.shared.proxy.ReceptProxy;
 
@@ -19,11 +17,11 @@ public class EigenReceptenView extends Composite implements HasText {
 
     private static EigenReceptenUiBinder uiBinder = GWT.create(EigenReceptenUiBinder.class);
     @UiField
-    public Button toevoegen;
+    Button toevoegen;
     @UiField
-    public DataGrid<ReceptProxy> dataGrid;
+    DataGrid<ReceptProxy> dataGrid;
     @UiField
-    public SimplePager pager;
+    SimplePager pager;
 
     interface EigenReceptenUiBinder extends UiBinder<Widget, EigenReceptenView> {
 
