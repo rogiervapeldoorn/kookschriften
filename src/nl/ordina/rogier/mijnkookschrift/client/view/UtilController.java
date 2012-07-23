@@ -4,7 +4,9 @@ import nl.ordina.rogier.mijnkookschrift.client.GewichtEenheid;
 import nl.ordina.rogier.mijnkookschrift.client.SoortKeuken;
 import nl.ordina.rogier.mijnkookschrift.client.SoortRecept;
 import nl.ordina.rogier.mijnkookschrift.client.TijdEenheid;
+import nl.ordina.rogier.mijnkookschrift.shared.proxy.ReceptProxy;
 
+import com.google.gwt.user.cellview.client.DataGrid;
 import com.google.gwt.user.client.ui.ListBox;
 
 public class UtilController {
@@ -48,6 +50,14 @@ public class UtilController {
 		listBox.setSelectedIndex(i);
 		break;
 	    }
+	}
+    }
+    static void emptyDataGrid(DataGrid<ReceptProxy> dataGrid)
+    {
+	System.out.println(dataGrid.getColumnCount());
+	for(int i=dataGrid.getColumnCount();i>0;i--)
+	{
+	    dataGrid.removeColumn(i-1);
 	}
     }
 }

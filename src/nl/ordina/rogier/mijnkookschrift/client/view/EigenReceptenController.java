@@ -14,8 +14,13 @@ import nl.ordina.rogier.mijnkookschrift.shared.proxy.UploadedImageProxy;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
+import com.google.gwt.event.logical.shared.ResizeEvent;
+import com.google.gwt.event.logical.shared.ResizeHandler;
+import com.google.gwt.user.cellview.client.DataGrid;
 import com.google.gwt.user.cellview.client.TextColumn;
 import com.google.gwt.user.client.Window;
+import com.google.gwt.user.client.WindowResizeListener;
+import com.google.gwt.user.client.ui.HTMLPanel;
 import com.google.gwt.view.client.ListDataProvider;
 import com.google.gwt.view.client.SelectionChangeEvent;
 import com.google.gwt.view.client.SingleSelectionModel;
@@ -53,8 +58,10 @@ public class EigenReceptenController implements ControllerInterface {
 	});
 
     }
-
+    
     public void getEigenRecepten() {
+	UtilController.emptyDataGrid(eigenRecepten.dataGrid);
+	eigenRecepten.dataGrid.setEmptyTableWidget(new HTMLPanel("Geen recept gevonden."));
 	eigenRecepten.pager.setDisplay(eigenRecepten.dataGrid);
 	eigenRecepten.pager.setPageSize(6);
 	final ListDataProvider<ReceptProxy> dataProvider = new ListDataProvider<ReceptProxy>();
@@ -128,6 +135,15 @@ public class EigenReceptenController implements ControllerInterface {
 		eigenRecepten.dataGrid.setRowCount(response.size(), true);
 		eigenRecepten.dataGrid.setRowData(0, response);
 
+		eigenRecepten.dataGrid.setHeight((com.google.gwt.user.client.Window.getClientHeight()-220)+"px");
+		com.google.gwt.user.client.Window.addResizeHandler(new ResizeHandler() {
+		    
+		    @Override
+		    public void onResize(ResizeEvent event) {
+			eigenRecepten.dataGrid.setHeight((com.google.gwt.user.client.Window.getClientHeight()-220)+"px");
+			
+		    }
+		});
 		// Set row selector
 		final SingleSelectionModel<ReceptProxy> selectionModel = new SingleSelectionModel<ReceptProxy>();
 		eigenRecepten.dataGrid.setSelectionModel(selectionModel);

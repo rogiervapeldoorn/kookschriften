@@ -1,5 +1,6 @@
 package nl.ordina.rogier.mijnkookschrift.client.view;
 
+import nl.ordina.rogier.mijnkookschrift.client.model.HistoryManager;
 import nl.ordina.rogier.mijnkookschrift.shared.proxy.ReceptProxy;
 
 import com.google.gwt.core.client.GWT;
@@ -39,9 +40,9 @@ public class ReceptenZoekenView extends Composite implements HasText {
     interface ReceptenZoekenUiBinder extends UiBinder<Widget, ReceptenZoekenView> {
     }
 
-    public ReceptenZoekenView() {
+    public ReceptenZoekenView(HistoryManager historyManager) {
 	initWidget(uiBinder.createAndBindUi(this));
-	ControllerInterface controller=ControllerFactory.newController(this);
+	ControllerInterface controller=ControllerFactory.newController(this,historyManager);
 	controller.init();
 	
     }

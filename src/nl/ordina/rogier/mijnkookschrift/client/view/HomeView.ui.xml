@@ -9,6 +9,7 @@
 	<g:HTMLPanel>
 	<h1>Mijn Kookschrift</h1>
 	<p>De naam zegt het al. Iedereen die een beetje van koken houd heeft wel een schrift met daarin belangrijke recepten.</p>
-	<p>Deze webapplicatie is bedoeld voor het bewaren van recepten. Dit kunnen oude recepten van oma zijn of gewoon leuk recepten die je hebt gevonden op internet. Daarnaast is het mogelijk recepten te delen met andere.</p>
+	<p>Deze webapplicatie is bedoeld voor het bewaren van deze recepten. Dit kunnen oude recepten van oma zijn of gewoon leuk recepten die je hebt gevonden op internet. 
+	    Het is ook mogelijk recepten van andere te bekijken en andere jouw recepten bekijken.</p>
 	</g:HTMLPanel>
 </ui:UiBinder> 

@@ -38,7 +38,7 @@ public class HistoryManager implements ValueChangeHandler<String> {
 	    break;
 	}
 	case ReceptenZoeken: {
-	    controller.changeWidget(new ReceptenZoekenView());
+	    controller.changeWidget(new ReceptenZoekenView(this));
 	    break;
 	}
 	case ReceptToevoegen: {

@@ -6,8 +6,8 @@
 			font-weight: bold;
 		}
 	</ui:style>
-	<g:HTMLPanel>
-		<g:Grid width="448px" height="155px">
+	<g:HTMLPanel width="100%" height="100%" >
+		<g:Grid width="100%" height="100%">
 			<g:row>
 				<g:customCell>
 					<g:Label text="Naam van recept:"/>
@@ -21,7 +21,7 @@
 					<g:Label text="Soort recept:"/>
 				</g:customCell>
 				<g:customCell>
-					<g:ListBox ui:field="soortRecept" width="173px" height="34"/>
+					<g:ListBox ui:field="soortRecept"/>
 				</g:customCell>
 			</g:row>
 			<g:row>
@@ -29,7 +29,7 @@
 					<g:Label text="Soort keuken:"/>
 				</g:customCell>
 				<g:customCell>
-					<g:ListBox ui:field="soortKeuken" width="173px" height="34"/>
+					<g:ListBox ui:field="soortKeuken"/>
 				</g:customCell>
 			</g:row>
 			<g:row>
@@ -51,9 +51,12 @@
 					<g:Button ui:field="zoeken">Zoeken</g:Button>
 				</g:customCell>
 			</g:row>
+			
 		</g:Grid>
-		<p1:DataGrid width="100%" height="550px" ui:field="dataGrid"/>
-		<p1:SimplePager location="CENTER" ui:field="pager"/>
+		<g:HTMLPanel>
+			<p1:DataGrid width="100%"  ui:field="dataGrid"/>
+			<p1:SimplePager location="CENTER" ui:field="pager"/>
+		</g:HTMLPanel>
 		
 		
 	</g:HTMLPanel>

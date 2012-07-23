@@ -12,8 +12,8 @@ public class ControllerFactory {
 	return new IngredientController(ingredient);
     }
 
-    public static ControllerInterface newController(ReceptenZoekenView receptenZoeken) {
-	return new ReceptenZoekenController(receptenZoeken);
+    public static ControllerInterface newController(ReceptenZoekenView receptenZoeken, HistoryManager historyManager) {
+	return new ReceptenZoekenController(receptenZoeken,historyManager);
     }
     public static ControllerInterface newController(HistoryManager historyManager, ReceptToevoegenView receptToevoegen) {
  	return new ReceptToevoegenController(historyManager, receptToevoegen);

@@ -7,10 +7,10 @@
 		}
 	</ui:style>
 	<g:HTMLPanel ui:field="mainPanel">
-		<g:Grid width="448px" height="155px">
+		<g:Grid>
 			<g:row>
 				<g:customCell>
-					<g:Label text="Naam van recept:" width="109px"/>
+					<g:Label text="Naam van recept:"/>
 				</g:customCell>
 				<g:customCell>
 					<g:TextBox ui:field="naamRecept"/>
@@ -21,7 +21,7 @@
 					<g:Label text="Soort recept:"/>
 				</g:customCell>
 				<g:customCell>
-					<g:ListBox ui:field="soortRecept" width="173px" height="34"/>
+					<g:ListBox ui:field="soortRecept"/>
 				</g:customCell>
 			</g:row>
 			<g:row>
@@ -29,7 +29,7 @@
 					<g:Label text="Soort keuken:"/>
 				</g:customCell>
 				<g:customCell>
-					<g:ListBox ui:field="soortKeuken" width="173px" height="34"/>
+					<g:ListBox ui:field="soortKeuken"/>
 				</g:customCell>
 			</g:row>
 			<g:row>
@@ -37,7 +37,7 @@
 					<g:Label text="Aantal Personen:"/>
 				</g:customCell>
 				<g:customCell>
-					<g:ListBox ui:field="aantalPersonen" width="173px" height="34"/>
+					<g:ListBox ui:field="aantalPersonen"/>
 				</g:customCell>
 			</g:row>
 			<g:row>
@@ -45,7 +45,7 @@
 					<g:Label text="Ingrediënten:"/>
 				</g:customCell>
 				<g:customCell>
-					<g:HorizontalPanel width="645px">
+					<g:HorizontalPanel>
 						<g:VerticalPanel ui:field="ingredienten"/>
 						<g:VerticalPanel/>
 					</g:HorizontalPanel>
@@ -67,13 +67,13 @@
 					<g:Label text="Bereiding:"/>
 				</g:customCell>
 				<g:customCell>
-					<g:TextArea width="649px" height="230px" ui:field="bereiding"/>
+					<g:TextArea width="100%" height="200px" ui:field="bereiding"/>
 				</g:customCell>
 			</g:row>
 		</g:Grid>
 		<g:FormPanel height="39px" ui:field="uploadForm">
-				<g:HorizontalPanel width="100%" height="39px" horizontalAlignment="ALIGN_LEFT">
-					<g:FileUpload ui:field="uploadField" width="553px" />
+				<g:HorizontalPanel width="100%" horizontalAlignment="ALIGN_LEFT">
+					<g:FileUpload ui:field="uploadField" />
 					<g:Button ui:field="uploadButton" text="upload" />
 				</g:HorizontalPanel>
 			</g:FormPanel>
