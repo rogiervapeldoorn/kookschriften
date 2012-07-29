@@ -7,6 +7,7 @@ import nl.ordina.rogier.mijnkookschrift.client.view.HomeView;
 import nl.ordina.rogier.mijnkookschrift.client.view.LoginView;
 import nl.ordina.rogier.mijnkookschrift.client.view.LogoutView;
 import nl.ordina.rogier.mijnkookschrift.client.view.ReceptToevoegenView;
+import nl.ordina.rogier.mijnkookschrift.client.view.ReceptView;
 import nl.ordina.rogier.mijnkookschrift.client.view.ReceptenZoekenView;
 import nl.ordina.rogier.mijnkookschrift.shared.proxy.DatastoreObjectProxy;
 
@@ -47,6 +48,10 @@ public class HistoryManager implements ValueChangeHandler<String> {
 	}
 	case Login: {
 	    controller.changeWidget(new LoginView(this,datastoreObjectProxy));
+	    break;
+	}
+	case ReceptView: {
+	    controller.changeWidget(new ReceptView(this,datastoreObjectProxy));
 	    break;
 	}
 	default:

@@ -48,7 +48,6 @@ public class UploadServlet extends HttpServlet {
 		    uploadedImage.setCreatedAt(new Date());
 		    uploadedImage.setServingUrl( imageUrl);
 		    uploadedImageDao.put(uploadedImage);
-		    Long keyString = uploadedImage.getId();
 		    res.setContentType("text/html");
 		    res.getWriter().print(imageUrl);
 		    res.getWriter().flush();

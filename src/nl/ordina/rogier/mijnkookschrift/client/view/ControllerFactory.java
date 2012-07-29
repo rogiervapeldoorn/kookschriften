@@ -18,4 +18,8 @@ public class ControllerFactory {
     public static ControllerInterface newController(HistoryManager historyManager, ReceptToevoegenView receptToevoegen) {
  	return new ReceptToevoegenController(historyManager, receptToevoegen);
      }
+    
+    public static ControllerInterface newController(HistoryManager historyManager, ReceptView receptView) {
+ 	return new ReceptViewController(historyManager, receptView);
+     }
 }

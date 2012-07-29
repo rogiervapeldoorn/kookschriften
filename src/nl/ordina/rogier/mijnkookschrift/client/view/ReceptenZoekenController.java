@@ -17,6 +17,7 @@ import com.google.gwt.event.logical.shared.ResizeHandler;
 import com.google.gwt.user.cellview.client.DataGrid;
 import com.google.gwt.user.cellview.client.TextColumn;
 import com.google.gwt.user.client.ui.HTMLPanel;
+import com.google.gwt.user.client.ui.Image;
 import com.google.gwt.view.client.ListDataProvider;
 import com.google.gwt.view.client.SelectionChangeEvent;
 import com.google.gwt.view.client.SingleSelectionModel;
@@ -53,6 +54,8 @@ public class ReceptenZoekenController implements ControllerInterface {
 
     public void zoekRecepten() {
 	UtilController.emptyDataGrid(receptenZoeken.dataGrid);
+	
+	receptenZoeken.dataGrid.setLoadingIndicator(new Image("ajax-loader.gif"));
 	receptenZoeken.dataGrid.setEmptyTableWidget(new HTMLPanel("Geen recept gevonden."));
 	receptenZoeken.pager.setDisplay(receptenZoeken.dataGrid);
 	receptenZoeken.pager.setPageSize(6);
@@ -160,8 +163,8 @@ public class ReceptenZoekenController implements ControllerInterface {
 
 				@Override
 				public void onSuccess(ReceptProxy response) {
-				    HistoryToken.ReceptToevoegen.fire();
-				    historyManager.changeValue(HistoryToken.ReceptToevoegen, response);
+				    HistoryToken.ReceptView.fire();
+				    historyManager.changeValue(HistoryToken.ReceptView, response);
 				}
 			    });
 			}
